@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https：//canglaoshi.blog/sitemap.xml

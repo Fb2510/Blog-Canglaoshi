@@ -1,0 +1,364 @@
+/* 科技：蓝图坐标、轨道信号和编号记录，结构化而非发光文字堆砌。 */
+:root {
+  --bg: #f3f6fc;
+  --surface: #fff;
+  --text: #1c2e49;
+  --muted: #61728a;
+  --line: #d9e2f0;
+  --accent: #225acc;
+  --soft: #e7effd;
+  --code: #eaf0f8;
+  --scrollbar: #afbfda;
+  --radius: 8px;
+  --tech-grid: #e4eaf5;
+  --tech-node: #309bb8;
+}
+:root.dark {
+  --bg: #111824;
+  --surface: #192333;
+  --text: #e1eaf8;
+  --muted: #9cacbf;
+  --line: #2d3e57;
+  --accent: #85b2ff;
+  --soft: #213453;
+  --code: #142031;
+  --scrollbar: #3b526e;
+  --tech-grid: #1e2a3d;
+  --tech-node: #63d0dc;
+}
+.theme-technology .site-header {
+  background: var(--surface);
+  border-top: 3px solid var(--accent);
+}
+.theme-technology .header-inner {
+  max-width: 1350px;
+  min-height: 74px;
+}
+.theme-technology .brand {
+  font-weight: 750;
+}
+.technology-workspace {
+  max-width: 1280px;
+}
+.tech-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  position: relative;
+  padding: 42px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(var(--tech-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--tech-grid) 1px, transparent 1px), var(--surface);
+  background-size: 32px 32px;
+  margin-bottom: 32px;
+  border-radius: 10px;
+}
+.tech-overview::before,
+.tech-overview::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-color: var(--accent);
+  border-style: solid;
+  pointer-events: none;
+}
+.tech-overview::before {
+  top: -1px;
+  left: -1px;
+  border-width: 3px 0 0 3px;
+  border-radius: 10px 0 0;
+}
+.tech-overview::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 3px 3px 0;
+  border-radius: 0 0 10px;
+}
+.tech-overview h1 {
+  letter-spacing: -0.04em;
+  max-width: 14em;
+}
+.tech-overview .intro-kicker {
+  font-family: Consolas, "Microsoft YaHei", monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+}
+.tech-overview .intro-copy {
+  align-self: center;
+}
+.intro-stats {
+  grid-column: 1/-1;
+  display: flex;
+  gap: 0;
+  padding-top: 24px;
+  margin: 24px 0 0;
+  border-top: 1px solid var(--line);
+}
+.intro-stats > div {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: baseline;
+  gap: 8px;
+  justify-content: flex-end;
+  padding: 0 36px;
+  border-right: 1px solid var(--line);
+}
+.intro-stats > div:first-child {
+  padding-left: 0;
+}
+.intro-stats > div:last-child {
+  border: 0;
+}
+.intro-stats dt {
+  font-size: 11px;
+  color: var(--muted);
+}
+.intro-stats dd {
+  font:
+    30px/1.2 Consolas,
+    monospace;
+  margin: 0;
+  color: var(--accent);
+}
+.tech-radar {
+  height: 220px;
+  width: 220px;
+  position: relative;
+  justify-self: center;
+}
+.radar-ring,
+.radar-orbit {
+  position: absolute;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  inset: 12px;
+}
+.ring-two {
+  inset: 38px;
+  border-style: dashed;
+}
+.radar-orbit {
+  inset: 0;
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--tech-node);
+  animation: tech-orbit 20s linear infinite;
+}
+.radar-core {
+  position: absolute;
+  inset: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.5;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--soft);
+  color: var(--accent);
+  border: 1px solid var(--line);
+  transform: rotate(-45deg);
+  border-radius: 18px;
+}
+.radar-node {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--tech-node);
+}
+.node-one {
+  top: 36px;
+  left: 43px;
+}
+.node-two {
+  right: 19px;
+  bottom: 51px;
+  background: var(--accent);
+}
+.tech-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 24px;
+}
+.theme-archive .tech-workbench {
+  grid-template-columns: minmax(0, 1fr);
+}
+.tech-feed {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+}
+.tech-section-bar {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.tech-section-bar > span:first-child {
+  color: var(--accent);
+  font-weight: 600;
+}
+.tech-entry {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 16px;
+}
+.tech-entry .card-index {
+  color: var(--accent);
+  font:
+    19px/1.8 Consolas,
+    monospace;
+  padding-top: 4px;
+}
+.tech-entry h2 {
+  font-size: 24px;
+  margin-top: 8px;
+}
+.tech-entry .card-summary {
+  font-size: 14px;
+}
+.tech-entry-footer {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.tech-entry-footer .read-more {
+  margin-left: auto;
+  font-size: 12px;
+}
+.tech-workspace .article-card:hover,
+.tech-entry:hover {
+  border-color: var(--accent);
+}
+.technology-workspace .home-sidebar {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+}
+.technology-workspace .sidebar-section h2 {
+  font-size: 12px;
+  color: var(--accent);
+}
+.technology-workspace .taxonomy-count {
+  font-family: Consolas, monospace;
+}
+.tech-reading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 246px;
+  align-items: start;
+  gap: 28px;
+}
+.tech-document {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 42px;
+}
+.tech-document .article-header {
+  position: relative;
+  border-bottom: 1px dashed var(--line);
+}
+.tech-document .prose h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.tech-document .prose h2::before {
+  content: "";
+  flex-shrink: 0;
+  width: 8px;
+  height: 18px;
+  background: var(--accent);
+}
+.technology-workspace .article-rail .toc {
+  background: var(--surface);
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.technology-workspace .ad-card {
+  border-radius: 6px;
+}
+.technology-workspace .ad-badge {
+  color: var(--accent);
+}
+@keyframes tech-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 980px) {
+  .tech-overview {
+    grid-template-columns: minmax(0, 1fr) 190px;
+    padding: 30px;
+  }
+  .tech-radar {
+    width: 180px;
+    height: 180px;
+  }
+  .radar-core {
+    inset: 49px;
+  }
+  .tech-reading {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tech-document {
+    padding: 32px;
+  }
+}
+@media (max-width: 760px) {
+  .tech-overview {
+    padding: 24px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tech-radar {
+    display: none;
+  }
+  .intro-stats {
+    margin-top: 18px;
+    gap: 18px;
+  }
+  .intro-stats > div {
+    padding: 0 18px 0 0;
+    gap: 4px;
+  }
+  .intro-stats dd {
+    font-size: 24px;
+  }
+  .intro-stats dt {
+    font-size: 10px;
+  }
+  .tech-workbench,
+  .tech-reading {
+    display: block;
+  }
+  .tech-feed {
+    padding: 20px;
+  }
+  .tech-entry {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 10px;
+  }
+  .tech-entry h2 {
+    font-size: 22px;
+  }
+  .tech-document {
+    padding: 26px 20px;
+  }
+  .technology-workspace .article-rail .toc {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .radar-orbit {
+    animation: none;
+  }
+}

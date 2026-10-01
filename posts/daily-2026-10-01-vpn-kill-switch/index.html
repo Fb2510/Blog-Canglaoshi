@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="technology">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VPN断开后上不了网？断线保护 Kill Switch 的排查指南 · 仓老师机场观察</title>
+<meta name="description" content="VPN断开后上不了网怎么办？解释Kill Switch断线保护、主动断开与意外掉线的区别，梳理安卓阻止非VPN连接和分流例外，给出三步排查方法。">
+<meta name="keywords" content="VPN断开后上不了网,Kill Switch,VPN断线保护,安卓VPN设置">
+<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://www.canglaoshi.blog/posts/daily-2026-10-01-vpn-kill-switch/">
+<meta property="og:title" content="VPN断开后上不了网？断线保护 Kill Switch 的排查指南">
+<meta property="og:description" content="VPN断开后上不了网怎么办？解释Kill Switch断线保护、主动断开与意外掉线的区别，梳理安卓阻止非VPN连接和分流例外，给出三步排查方法。">
+<meta property="og:url" content="https://www.canglaoshi.blog/posts/daily-2026-10-01-vpn-kill-switch/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="仓老师机场观察">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png"><meta property="og:image:alt" content="仓老师机场观察">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VPN断开后上不了网？断线保护 Kill Switch 的排查指南">
+<meta name="twitter:description" content="VPN断开后上不了网怎么办？解释Kill Switch断线保护、主动断开与意外掉线的区别，梳理安卓阻止非VPN连接和分流例外，给出三步排查方法。">
+<meta name="twitter:image" content="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
+<meta name="author" content="仓老师机场观察"><meta property="article:published_time" content="2026-10-01T09:28:22&#43;08:00"><meta property="article:modified_time" content="2026-10-01T23:02:14&#43;08:00"><meta property="article:tag" content="VPN"><meta property="article:tag" content="网络隐私">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://www.canglaoshi.blog/posts/daily-2026-10-01-vpn-kill-switch/#article","@type":"BlogPosting","author":{"@type":"Person","name":"仓老师机场观察"},"dateModified":"2026-10-01T23:02:14+08:00","datePublished":"2026-10-01T09:28:22+08:00","description":"VPN断开后上不了网怎么办？解释Kill Switch断线保护、主动断开与意外掉线的区别，梳理安卓阻止非VPN连接和分流例外，给出三步排查方法。","headline":"VPN断开后上不了网？断线保护 Kill Switch 的排查指南","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://www.canglaoshi.blog/posts/daily-2026-10-01-vpn-kill-switch/","@type":"WebPage"},"url":"https://www.canglaoshi.blog/posts/daily-2026-10-01-vpn-kill-switch/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://www.canglaoshi.blog/","name":"仓老师机场观察","position":1},{"@type":"ListItem","item":"https://www.canglaoshi.blog/posts/daily-2026-10-01-vpn-kill-switch/","name":"VPN断开后上不了网？断线保护 Kill Switch 的排查指南","position":2}]}]}</script>
+
+<script>(()=>{let mode='system';try{const saved=localStorage.getItem('reader-theme');if(['system','light','dark'].includes(saved))mode=saved}catch{}const root=document.documentElement;root.dataset.colorMode=mode;root.classList.toggle('dark',mode==='dark'||(mode==='system'&&matchMedia('(prefers-color-scheme: dark)').matches))})();</script>
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/style.css">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/advertisements.css">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/search.css"><script defer src="https://www.canglaoshi.blog/assets/theme/search.js"></script>
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/layouts.css"><link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/effects.css"><link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/skin.css">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/viewer.css">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/reader.css">
+<link rel="icon" href="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/artalk.css"><script defer src="https://www.canglaoshi.blog/assets/theme/artalk.js"></script>
+<script defer src="https://www.canglaoshi.blog/assets/theme/theme.js"></script>
+<script defer src="https://www.canglaoshi.blog/assets/theme/reader.js"></script>
+<script defer src="https://www.canglaoshi.blog/assets/theme/viewer.js"></script>
+<script defer src="https://www.canglaoshi.blog/assets/theme/image-viewer.js"></script>
+
+<script defer src="https://www.canglaoshi.blog/assets/theme/interactions.js"></script>
+
+
+
+</head>
+
+<body class="theme-technology article-page">
+<a class="skip" href="#main">跳到正文</a>
+
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" href="https://www.canglaoshi.blog/"><img src="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png" alt="" width="38" height="38"><span>仓老师机场观察</span></a>
+<nav id="site-navigation" aria-label="站点导航"><a href="https://www.canglaoshi.blog/">首页</a></nav>
+<a class="search-toggle" href="https://www.canglaoshi.blog/search/" data-open-dialog="search-dialog" aria-haspopup="dialog" aria-controls="search-dialog" aria-label="搜索" title="搜索"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></a>
+<button id="theme-mode" class="theme-toggle theme-cycle" type="button" aria-label="明暗模式：跟随系统，点击切换为明亮" title="跟随系统 · 点击切换为明亮">
+<svg class="theme-icon-system" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+<svg class="theme-icon-moon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 15.5A8.5 8.5 0 0 1 8.5 3.8 8.5 8.5 0 1 0 20.2 15.5Z"/></svg>
+<svg class="theme-icon-sun" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
+<span id="theme-mode-status" class="visually-hidden" role="status" aria-live="polite"></span>
+<button id="menu-toggle" class="menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="打开菜单" title="打开菜单">
+<svg class="menu-icon-open" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+<svg class="menu-icon-close" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg>
+</button>
+</div>
+</header>
+
+<div class="article-viewport"><div class="article-scroll">
+<main id="main" tabindex="-1" class="technology-workspace theme-workspace theme-article">
+
+<nav class="breadcrumbs" aria-label="面包屑导航"><ol><li><a href="https://www.canglaoshi.blog/">仓老师机场观察</a></li><li><span aria-current="page">VPN断开后上不了网？断线保护 Kill Switch 的排查指南</span></li></ol></nav>
+
+
+<div class="tech-reading"><div class="tech-document">
+<article data-pagefind-body>
+<header class="article-header">
+<div class="eyebrow" data-pagefind-ignore>
+思考记录</div>
+<h1 data-pagefind-meta="title">VPN断开后上不了网？断线保护 Kill Switch 的排查指南</h1>
+<div class="metadata" data-pagefind-ignore><span>仓老师机场观察</span><time datetime="2026-10-01T09:28:22&#43;08:00">2026-10-01</time><span><span id="page-views">—</span> 次阅读</span></div>
+<div class="chips" data-pagefind-ignore><a href="https://www.canglaoshi.blog/categories/network-troubleshooting/">网络排障</a></div>
+</header>
+<div class="prose"><p>**VPN 断开后上不了网，可能是断线保护正在阻止流量改走普通网络。**先看客户端有没有“正在阻断网络”的提示，再排查故障；别急着重装系统，门卫按规定拦人，不等于大门坏了。</p>
+<h2 id="kill-switch-">Kill Switch 是什么？</h2>
+<p>Kill Switch 通常译为断线保护：VPN 连接意外中断时，阻止原本应经过隧道的流量直接发出。它更像保险丝，负责在异常时切断通路，不能让节点变快，也不能修好掉线的线路。</p>
+<p>关键是分清<strong>意外掉线和主动断开</strong>。以 <a href="https://protonvpn.com/support/advanced-kill-switch">Proton VPN 官方说明</a>为例：</p>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>主要行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准断线保护</td>
+<td>针对连接意外中断进行阻断</td>
+</tr>
+<tr>
+<td>高级断线保护</td>
+<td>主动断开后仍阻断，重启后也可持续生效</td>
+</tr>
+</tbody>
+</table>
+<p>所以，“我已经退出软件，怎么还没网？”未必是软件闹脾气，可能是你先前要求它“没连好就不放行”。这张表是产品示例，不能照搬到所有客户端。</p>
+<h2 id="heading">安卓还要检查系统开关</h2>
+<p>在系统设置中搜索 VPN，查看对应应用的“始终开启 VPN”和“阻止未使用 VPN 的连接”。两者作用不同：前者维护服务运行，后者限制绕过 VPN 的连接；具体中文名称因手机而异。<a href="https://developer.android.com/develop/connectivity/vpn">Android 官方文档</a>说明，开启阻断后，被排除在 VPN 之外的应用也会失去网络。</p>
+<p>别把这个结果套用到电脑端。例如 <a href="https://mullvad.net/en/help/using-mullvad-vpn-app">Mullvad 桌面版说明</a>指出，启用 Lockdown mode 后，分流排除的应用仍能联网。开关同名，脾气未必相同。</p>
+<h2 id="heading-1">按顺序恢复连接</h2>
+<ol>
+<li>**先看状态和记录。**记下是切换网络后掉线，还是自己点了断开，并保存原设置。一次改五个按钮，排障容易变成抽盲盒。</li>
+<li>**还需要 VPN，就先重连。**确认客户端恢复连接后，再测试常用网页。若仍连接失败，查看服务状态和错误记录，避免反复切换开关。</li>
+<li>**确实想直接联网，再调整保护。**按照当前客户端说明关闭高级阻断或对应系统限制；这样做意味着允许流量绕过 VPN。若仍无网络，继续检查本地网络及代理设置，别把所有问题都算到断线保护头上。</li>
+</ol>
+<h3 id="heading-2">手动断开就算测试过了吗？</h3>
+<p>不算。对只在意外掉线时触发的功能，主动点“断开”并不是同一种场景。应先核对官方说明中的触发条件、系统版本和分流范围，再按相应方法验证。一个浏览器能否打开网页，也不能代表所有应用的连接情况。先弄清测试对象，才不会拿体温计去测网速。</p>
+<h2 id="heading-3">机场订阅也自带断线保护吗？</h2>
+<p>不能仅凭订阅名称判断。这通常取决于客户端、系统和配置；购买节点不等于获得某种保护功能。可先看<a href="https://www.canglaoshi.blog/posts/vpn-vs-airport-proxy-guide/">VPN 与机场的区别</a>，再对照<a href="https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/">规则、全局与 TUN 模式</a>确认设置含义。</p>
+<p>遇到问题，可带客户端版本和脱敏错误信息来交流：<a href="https://t.me/oldsix985">Telegram 联系我</a>。</p>
+<h2 id="heading-4">资料来源</h2>
+<p>资料核对日期：2026 年 10 月 1 日。本文依据官方功能说明整理，不代表本站已完成各平台实测。</p>
+<ul>
+<li><a href="https://protonvpn.com/support/advanced-kill-switch">Proton VPN：How to use advanced kill switch</a>，核对标准与高级断线保护的差异。</li>
+<li><a href="https://developer.android.com/develop/connectivity/vpn">Android Developers：VPN</a>，核对 Always-on VPN、Blocked connections 与应用名单的关系。</li>
+<li><a href="https://mullvad.net/en/help/using-mullvad-vpn-app">Mullvad：Using the Mullvad VPN app</a>，页面标注更新于 2026 年 9 月 18 日，核对 Lockdown mode 的分流例外。</li>
+</ul>
+</div>
+<div class="article-likes" data-pagefind-ignore>
+<button id="page-like" class="like-button" type="button" aria-pressed="false" aria-describedby="page-like-message" disabled>
+<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+<span id="page-like-label">点赞</span><span id="page-like-count">—</span>
+</button><p id="page-like-message" role="status"></p>
+</div>
+<div class="article-tags" data-pagefind-ignore><a href="https://www.canglaoshi.blog/tags/vpn/"># VPN</a><a href="https://www.canglaoshi.blog/tags/online-privacy/"># 网络隐私</a></div>
+<nav class="pagination" aria-label="相邻文章" data-pagefind-ignore><span></span><a href="https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/">下一篇 →</a></nav>
+<section class="comments-section" data-pagefind-ignore><h2>评论</h2><div id="comments"></div></section>
+</article>
+</div><div class="article-rail">
+<aside class="toc"><div>本篇目录</div><nav aria-label="文章目录"><a class="level-2" href="#kill-switch-">Kill Switch 是什么？</a><a class="level-2" href="#heading">安卓还要检查系统开关</a><a class="level-2" href="#heading-1">按顺序恢复连接</a><a class="level-3" href="#heading-2">手动断开就算测试过了吗？</a><a class="level-2" href="#heading-3">机场订阅也自带断线保护吗？</a><a class="level-2" href="#heading-4">资料来源</a></nav></aside>
+</div></div>
+
+</main>
+</div>
+<button id="back-to-top" class="back-to-top" type="button" aria-label="返回顶部" title="返回顶部" hidden>
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M12 20V8m-5 5 5-5 5 5"/></svg>
+</button>
+</div>
+
+<footer class="site-footer">
+
+
+</footer>
+
+
+
+<dialog id="search-dialog" class="reader-dialog site-search" aria-labelledby="search-title" data-reader-dialog data-pagefind-ignore>
+<header class="reader-dialog-header"><h2 id="search-title">搜索文章</h2><button class="dialog-close" type="button" data-close-dialog aria-label="关闭搜索" title="关闭搜索">×</button></header>
+<div class="reader-dialog-body">
+
+<div id="site-search-ui" data-module="https://www.canglaoshi.blog/pagefind/pagefind-component-ui.js" data-stylesheet="https://www.canglaoshi.blog/pagefind/pagefind-component-ui.css" hidden>
+
+<pagefind-config bundle-path="https://www.canglaoshi.blog/pagefind/" base-url="https://www.canglaoshi.blog/" lang="zh-cn" no-worker></pagefind-config>
+<pagefind-input placeholder="搜索文章标题或正文"></pagefind-input>
+<pagefind-summary></pagefind-summary>
+<pagefind-results></pagefind-results>
+</div>
+<p id="search-status" class="search-status" role="status">正在加载搜索…</p>
+<button id="search-retry" class="button" type="button" hidden>重新加载</button>
+
+</div>
+</dialog>
+
+<script id="blog-comments-config" type="application/json">{"comments":true,"likes":true,"locale":"zh-CN","pageKey":"/p/5940f73e-e103-4f63-8dfe-a70273d34b62/","pageTitle":"VPN断开后上不了网？断线保护 Kill Switch 的排查指南","server":"https://upfqpobmiewm.sealosgzg.site","site":"xblog-88abb41f-3510-449d-bb67-00edd9a24e07","views":true,"viewsBase":0}</script>
+
+</body>
+</html>

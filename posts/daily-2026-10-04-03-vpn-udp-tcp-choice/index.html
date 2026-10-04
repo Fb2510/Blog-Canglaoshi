@@ -4,23 +4,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Clash规则模式和全局模式怎么选？别把TUN当加速开关 · 仓老师机场观察</title>
-<meta name="description" content="Clash规则模式和全局模式怎么选？用一张对照表讲清规则、全局、直连与TUN的区别，说明为什么全局不保证接管所有应用，并提供日常设置与排查方法。">
-<meta name="keywords" content="Clash规则模式,Clash全局模式,TUN模式区别,VPN分流,机场客户端,Mihomo">
-<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/">
-<meta property="og:title" content="Clash规则模式和全局模式怎么选？别把TUN当加速开关">
-<meta property="og:description" content="Clash规则模式和全局模式怎么选？用一张对照表讲清规则、全局、直连与TUN的区别，说明为什么全局不保证接管所有应用，并提供日常设置与排查方法。">
-<meta property="og:url" content="https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/">
+<title>VPN的UDP和TCP怎么选？先分清连接方式与应用流量 · 仓老师机场观察</title>
+<meta name="description" content="VPN的UDP和TCP怎么选择？本文解释传输机制、客户端默认建议和UDP失败时的TCP对照方法，区分隧道协议与应用流量，不承诺某种协议在所有网络都更快。">
+<meta name="keywords" content="VPN UDP TCP怎么选,UDP和TCP区别,VPN协议选择,OpenVPN UDP TCP">
+<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://www.canglaoshi.blog/posts/daily-2026-10-04-03-vpn-udp-tcp-choice/">
+<meta property="og:title" content="VPN的UDP和TCP怎么选？先分清连接方式与应用流量">
+<meta property="og:description" content="VPN的UDP和TCP怎么选择？本文解释传输机制、客户端默认建议和UDP失败时的TCP对照方法，区分隧道协议与应用流量，不承诺某种协议在所有网络都更快。">
+<meta property="og:url" content="https://www.canglaoshi.blog/posts/daily-2026-10-04-03-vpn-udp-tcp-choice/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="仓老师机场观察">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png"><meta property="og:image:alt" content="仓老师机场观察">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Clash规则模式和全局模式怎么选？别把TUN当加速开关">
-<meta name="twitter:description" content="Clash规则模式和全局模式怎么选？用一张对照表讲清规则、全局、直连与TUN的区别，说明为什么全局不保证接管所有应用，并提供日常设置与排查方法。">
+<meta name="twitter:title" content="VPN的UDP和TCP怎么选？先分清连接方式与应用流量">
+<meta name="twitter:description" content="VPN的UDP和TCP怎么选择？本文解释传输机制、客户端默认建议和UDP失败时的TCP对照方法，区分隧道协议与应用流量，不承诺某种协议在所有网络都更快。">
 <meta name="twitter:image" content="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
-<meta name="author" content="仓老师机场观察"><meta property="article:published_time" content="2026-09-30T09:19:43&#43;08:00"><meta property="article:modified_time" content="2026-09-30T12:49:30&#43;08:00"><meta property="article:tag" content="VPN"><meta property="article:tag" content="机场指南">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/#article","@type":"BlogPosting","author":{"@type":"Person","name":"仓老师机场观察"},"dateModified":"2026-09-30T12:49:30+08:00","datePublished":"2026-09-30T09:19:43+08:00","description":"Clash规则模式和全局模式怎么选？用一张对照表讲清规则、全局、直连与TUN的区别，说明为什么全局不保证接管所有应用，并提供日常设置与排查方法。","headline":"Clash规则模式和全局模式怎么选？别把TUN当加速开关","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/","@type":"WebPage"},"url":"https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://www.canglaoshi.blog/","name":"仓老师机场观察","position":1},{"@type":"ListItem","item":"https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/","name":"Clash规则模式和全局模式怎么选？别把TUN当加速开关","position":2}]}]}</script>
+<meta name="author" content="仓老师机场观察"><meta property="article:published_time" content="2026-10-04T09:22:50&#43;08:00"><meta property="article:modified_time" content="2026-10-04T09:51:52&#43;08:00"><meta property="article:tag" content="VPN">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://www.canglaoshi.blog/posts/daily-2026-10-04-03-vpn-udp-tcp-choice/#article","@type":"BlogPosting","author":{"@type":"Person","name":"仓老师机场观察"},"dateModified":"2026-10-04T09:51:52+08:00","datePublished":"2026-10-04T09:22:50+08:00","description":"VPN的UDP和TCP怎么选择？本文解释传输机制、客户端默认建议和UDP失败时的TCP对照方法，区分隧道协议与应用流量，不承诺某种协议在所有网络都更快。","headline":"VPN的UDP和TCP怎么选？先分清连接方式与应用流量","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://www.canglaoshi.blog/posts/daily-2026-10-04-03-vpn-udp-tcp-choice/","@type":"WebPage"},"url":"https://www.canglaoshi.blog/posts/daily-2026-10-04-03-vpn-udp-tcp-choice/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://www.canglaoshi.blog/","name":"仓老师机场观察","position":1},{"@type":"ListItem","item":"https://www.canglaoshi.blog/posts/daily-2026-10-04-03-vpn-udp-tcp-choice/","name":"VPN的UDP和TCP怎么选？先分清连接方式与应用流量","position":2}]}]}</script>
 
 <script>(()=>{let mode='system';try{const saved=localStorage.getItem('reader-theme');if(['system','light','dark'].includes(saved))mode=saved}catch{}const root=document.documentElement;root.dataset.colorMode=mode;root.classList.toggle('dark',mode==='dark'||(mode==='system'&&matchMedia('(prefers-color-scheme: dark)').matches))})();</script>
 <link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/style.css">
@@ -66,61 +66,67 @@
 <div class="page-viewport article-viewport"><div class="page-scroll article-scroll">
 <main id="main" tabindex="-1" class="technology-workspace theme-workspace theme-article">
 
-<nav class="breadcrumbs" aria-label="面包屑导航"><ol><li><a href="https://www.canglaoshi.blog/">仓老师机场观察</a></li><li><span aria-current="page">Clash规则模式和全局模式怎么选？别把TUN当加速开关</span></li></ol></nav>
+<nav class="breadcrumbs" aria-label="面包屑导航"><ol><li><a href="https://www.canglaoshi.blog/">仓老师机场观察</a></li><li><span aria-current="page">VPN的UDP和TCP怎么选？先分清连接方式与应用流量</span></li></ol></nav>
 
 
 <div class="tech-reading"><div class="article-rail">
-<aside class="toc"><div>本篇目录</div><nav aria-label="文章目录"><a class="level-2" href="#heading">规则、全局、直连，分别管什么？</a><a class="level-2" href="#tun-">TUN 为什么不是另一种全局模式？</a><a class="level-2" href="#heading-1">日常使用，按这三步选择</a><a class="level-2" href="#heading-2">两个常见误会</a></nav></aside>
+<aside class="toc"><div>本篇目录</div><nav aria-label="文章目录"><a class="level-2" href="#heading">两者差在哪？用快递来理解</a><a class="level-2" href="#udp">为什么客户端经常推荐UDP？</a><a class="level-2" href="#heading-1">先分清隧道协议与应用流量</a><a class="level-2" href="#heading-2">实际选择，可以这样做</a><a class="level-2" href="#heading-3">资料来源</a></nav></aside>
 </div><div class="tech-document">
 <article data-pagefind-body>
 <header class="article-header">
 <div class="eyebrow" data-pagefind-ignore>
 思考记录</div>
-<h1 data-pagefind-meta="title">Clash规则模式和全局模式怎么选？别把TUN当加速开关</h1>
-<div class="metadata" data-pagefind-ignore><span>仓老师机场观察</span><time datetime="2026-09-30T09:19:43&#43;08:00">2026-09-30</time><span><span id="page-views">—</span> 次阅读</span></div>
+<h1 data-pagefind-meta="title">VPN的UDP和TCP怎么选？先分清连接方式与应用流量</h1>
+<div class="metadata" data-pagefind-ignore><span>仓老师机场观察</span><time datetime="2026-10-04T09:22:50&#43;08:00">2026-10-04</time><span><span id="page-views">—</span> 次阅读</span></div>
 <div class="chips" data-pagefind-ignore><a href="https://www.canglaoshi.blog/categories/vpn-basics/">VPN入门</a></div>
 </header>
-<div class="prose"><p>**规则模式和全局模式决定流量进来后怎么走，TUN 负责把流量引入客户端。**它们不是三档“网速增压器”。本文以使用 Mihomo 内核的 Clash 类客户端为例；其他 VPN 应用的名称和行为可能不同。</p>
-<p>按钮一多，新手容易全都打开，像把空调设成最低温，指望房间立刻进入冰河时代。网络设置更需要分清每个开关的工作。</p>
-<h2 id="heading">规则、全局、直连，分别管什么？</h2>
+<div class="prose"><p>VPN的UDP和TCP怎么选？连接正常时优先沿用客户端推荐设置；需要低等待的应用可比较UDP，UDP连接失败时再尝试产品支持的TCP方案。它们是运输方式，不是“一键快”和“一键安全”两个按钮。</p>
+<h2 id="heading">两者差在哪？用快递来理解</h2>
+<p>TCP会管理数据顺序、确认送达，并对丢失的数据进行重传。UDP本身不提供相同的送达确认、排序和重传机制，更像先把当前消息发出去；是否补发、如何处理错误，还取决于上层应用。<a href="https://www.cloudflare.com/learning/ddos/glossary/user-datagram-protocol-udp/">来源：Cloudflare的UDP说明</a></p>
+<p>实时通话里，迟到太久的一句“喂”，可能已经失去意义。文件传输则更在乎内容完整。不过，这并不表示走UDP的VPN会让网页文件随便缺页：隧道内部的应用仍可使用自己的传输机制。</p>
+<h2 id="udp">为什么客户端经常推荐UDP？</h2>
+<p><a href="https://protonvpn.com/support/udp-tcp">Proton VPN官方说明</a>以OpenVPN为例，默认优先UDP，并建议没有明确问题时保留默认设置；UDP无法连接时，可以尝试TCP。这是该产品的选择建议，不能当成所有机场线路的统一结论。</p>
+<p>网络路径、服务器负载和客户端实现都会影响结果。TCP能连上，不等于一定更快；UDP能连上，也不等于不会掉线。别让协议名字替你写测评，字母再帅也不包售后。</p>
+<h2 id="heading-1">先分清隧道协议与应用流量</h2>
+<p>设置里的“UDP/TCP”可能指设备到VPN服务器之间的连接方式。浏览器、游戏在隧道里面发送的流量，是另一个层次。换了隧道运输方式，不代表所有应用都换成了同一种协议。</p>
+<p>也不是每个客户端都有自由切换按钮。原生WireGuard使用UDP；某些服务提供额外封装或TCP模式，应按该产品、平台和版本的说明判断，不能给所有订阅强行套同一个教程。</p>
+<h2 id="heading-2">实际选择，可以这样做</h2>
 <table>
 <thead>
 <tr>
-<th>模式</th>
-<th>已进入内核的连接如何处理</th>
+<th>当前情况</th>
+<th>可尝试的方向</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>规则</td>
-<td>按配置匹配规则，决定代理、直连等策略</td>
+<td>默认连接正常</td>
+<td>保留推荐或自动模式</td>
 </tr>
 <tr>
-<td>全局</td>
-<td>交给 GLOBAL 策略组中选择的代理或策略</td>
+<td>UDP始终无法建立连接</td>
+<td>查服务状态，再试支持的TCP方式</td>
 </tr>
 <tr>
-<td>直连</td>
-<td>使用直连策略</td>
+<td>能连接但互动卡顿</td>
+<td>固定目标，比较持续响应</td>
+</tr>
+<tr>
+<td>客户端没有协议选项</td>
+<td>查兼容说明，不乱改配置字段</td>
 </tr>
 </tbody>
 </table>
-<p>这是 <a href="https://wiki.metacubex.one/config/general/">Mihomo 运行模式文档</a>列出的区别。<strong>“全局”不保证设备上每个应用都已经被接管</strong>，还要看流量是否进入内核；GLOBAL 组的实际选择也要检查，不能只看模式名称。</p>
-<p>规则模式也不会读心。文档说明规则通常按从上到下的顺序匹配，前面的规则优先。某个网站走错路时，应查看命中记录和规则顺序，而不是给节点多点几次“加油”。<a href="https://wiki.metacubex.one/config/rules/">来源：路由规则</a></p>
-<h2 id="tun-">TUN 为什么不是另一种全局模式？</h2>
-<p>TUN 使用虚拟网络接口接收流量，自动路由等设置会影响接入范围；排除网段、应用名单和系统差异也可能影响结果。<a href="https://wiki.metacubex.one/config/inbound/tun/">来源：TUN 文档</a></p>
-<p>可以把 TUN 想成收件窗口，把规则模式想成分拣员：包裹送进窗口后，仍可以分别发往不同出口。所以 <strong>TUN 可以配合规则模式使用</strong>，不是一打开就必须全部走同一个节点。</p>
-<h2 id="heading-1">日常使用，按这三步选择</h2>
-<ol>
-<li>**先明确目标。**列出需要代理的应用，以及希望直连的服务；还没分清客户端和节点，可先看<a href="https://www.canglaoshi.blog/posts/vpn-vs-airport-proxy-guide/">入门说明</a>。</li>
-<li>**用规则模式检查实际连接。**访问目标后，看客户端连接记录中的域名、匹配规则和出口。某个应用没按预期连接，先判断是否接管，再判断分流是否正确。</li>
-<li>**必要时做单项对照。**固定网络和节点，只切换规则与全局，重新发起测试连接。若仅全局正常，优先检查规则及策略组选择；测试后恢复符合日常需求的设置。</li>
-</ol>
-<p>操作前记录原设置。一次改五个开关，就算成功，也很难知道是哪位按钮立了功。</p>
-<h2 id="heading-2">两个常见误会</h2>
-<p>**全局一定更快吗？**不一定。模式主要改变连接策略，不等于购买了更宽的线路；卡顿可继续按<a href="https://www.canglaoshi.blog/posts/vpn-slow-speed-troubleshooting/">速度排查指南</a>定位。</p>
-<p>**规则模式一定省机场流量吗？**只有原本经过服务的部分流量改为直连时，才可能减少相应用量，具体仍看规则与计费口径。</p>
-<p>遇到模式选择问题，可带客户端版本和脱敏截图来交流：<a href="https://t.me/oldsix985">Telegram 联系我</a>，不要附完整订阅地址。</p>
+<p>每次只改一个选项，固定设备、网络、节点和目标，记下是否连接成功及实际应用表现。如果改动后没有改善，恢复原设置，避免把几次变化搅成网络版八宝粥。</p>
+<p>仍连不上时，继续核对账号有效期、服务公告和配置支持范围。不能只因为网页打不开，就断定某个协议被限制；DNS、权限或本地网络也可能参与。</p>
+<p>协议差异本身不是匿名程度或加密强度的评分。安全性要看整个VPN协议、软件与服务的实现。速度问题可接着阅读本站<a href="https://www.canglaoshi.blog/posts/vpn-slow-speed-troubleshooting/">VPN卡顿排查指南</a>，先定位问题，再决定是否切换。</p>
+<p><em>作者：仓老师机场观察</em></p>
+<h2 id="heading-3">资料来源</h2>
+<p>资料查阅日期：2026年10月4日。本文没有对具体线路进行协议对比实测。</p>
+<ul>
+<li><a href="https://www.cloudflare.com/learning/ddos/glossary/user-datagram-protocol-udp/">Cloudflare：UDP与TCP的传输差异</a></li>
+<li><a href="https://protonvpn.com/support/udp-tcp">Proton VPN：UDP与TCP的选择建议</a></li>
+</ul>
 </div>
 <div class="article-likes" data-pagefind-ignore>
 <button id="page-like" class="like-button" type="button" aria-pressed="false" aria-describedby="page-like-message" disabled>
@@ -128,8 +134,8 @@
 <span id="page-like-label">点赞</span><span id="page-like-count">—</span>
 </button><p id="page-like-message" role="status"></p>
 </div>
-<div class="article-tags" data-pagefind-ignore><a href="https://www.canglaoshi.blog/tags/vpn/"># VPN</a><a href="https://www.canglaoshi.blog/tags/proxy-guides/"># 机场指南</a></div>
-<nav class="pagination" aria-label="相邻文章" data-pagefind-ignore><a href="https://www.canglaoshi.blog/posts/daily-2026-10-01-vpn-kill-switch/">← 上一篇</a><a href="https://www.canglaoshi.blog/posts/is-100gb-vpn-data-enough/">下一篇 →</a></nav>
+<div class="article-tags" data-pagefind-ignore><a href="https://www.canglaoshi.blog/tags/vpn/"># VPN</a></div>
+<nav class="pagination" aria-label="相邻文章" data-pagefind-ignore><a href="https://www.canglaoshi.blog/posts/daily-2026-10-04-04-vpn-captcha-challenges/">← 上一篇</a><a href="https://www.canglaoshi.blog/posts/daily-2026-10-04-02-game-latency-test-target/">下一篇 →</a></nav>
 <section class="comments-section" data-pagefind-ignore><h2>评论</h2><div id="comments"></div></section>
 </article>
 </div></div>
@@ -165,7 +171,7 @@
 </div>
 </dialog>
 
-<script id="blog-comments-config" type="application/json">{"comments":true,"likes":true,"locale":"zh-CN","pageKey":"/p/a59ef5b4-a4c1-4b15-a228-59afd8186c2a/","pageTitle":"Clash规则模式和全局模式怎么选？别把TUN当加速开关","server":"https://upfqpobmiewm.sealosgzg.site","site":"xblog-88abb41f-3510-449d-bb67-00edd9a24e07","views":true,"viewsBase":0}</script>
+<script id="blog-comments-config" type="application/json">{"comments":true,"likes":true,"locale":"zh-CN","pageKey":"/p/ddbfe19f-cae5-47ef-947d-131df1b3dd67/","pageTitle":"VPN的UDP和TCP怎么选？先分清连接方式与应用流量","server":"https://upfqpobmiewm.sealosgzg.site","site":"xblog-88abb41f-3510-449d-bb67-00edd9a24e07","views":true,"viewsBase":0}</script>
 
 </body>
 </html>

@@ -4,23 +4,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Clash规则模式和全局模式怎么选？别把TUN当加速开关 · 仓老师机场观察</title>
-<meta name="description" content="Clash规则模式和全局模式怎么选？用一张对照表讲清规则、全局、直连与TUN的区别，说明为什么全局不保证接管所有应用，并提供日常设置与排查方法。">
-<meta name="keywords" content="Clash规则模式,Clash全局模式,TUN模式区别,VPN分流,机场客户端,Mihomo">
-<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/">
-<meta property="og:title" content="Clash规则模式和全局模式怎么选？别把TUN当加速开关">
-<meta property="og:description" content="Clash规则模式和全局模式怎么选？用一张对照表讲清规则、全局、直连与TUN的区别，说明为什么全局不保证接管所有应用，并提供日常设置与排查方法。">
-<meta property="og:url" content="https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/">
+<title>VPN加无痕模式就匿名了吗？浏览记录、出口IP与账号的区别 · 仓老师机场观察</title>
+<meta name="description" content="VPN加无痕模式能完全匿名吗？本文区分本机浏览记录、网络出口和网站账号识别，说明关闭全部私密窗口、下载文件保留及登录后的身份关联。">
+<meta name="keywords" content="VPN无痕模式匿名,无痕模式和VPN区别,无痕模式浏览记录,VPN账号隐私">
+<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://www.canglaoshi.blog/posts/daily-2026-10-04-05-vpn-incognito-privacy/">
+<meta property="og:title" content="VPN加无痕模式就匿名了吗？浏览记录、出口IP与账号的区别">
+<meta property="og:description" content="VPN加无痕模式能完全匿名吗？本文区分本机浏览记录、网络出口和网站账号识别，说明关闭全部私密窗口、下载文件保留及登录后的身份关联。">
+<meta property="og:url" content="https://www.canglaoshi.blog/posts/daily-2026-10-04-05-vpn-incognito-privacy/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="仓老师机场观察">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png"><meta property="og:image:alt" content="仓老师机场观察">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Clash规则模式和全局模式怎么选？别把TUN当加速开关">
-<meta name="twitter:description" content="Clash规则模式和全局模式怎么选？用一张对照表讲清规则、全局、直连与TUN的区别，说明为什么全局不保证接管所有应用，并提供日常设置与排查方法。">
+<meta name="twitter:title" content="VPN加无痕模式就匿名了吗？浏览记录、出口IP与账号的区别">
+<meta name="twitter:description" content="VPN加无痕模式能完全匿名吗？本文区分本机浏览记录、网络出口和网站账号识别，说明关闭全部私密窗口、下载文件保留及登录后的身份关联。">
 <meta name="twitter:image" content="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
-<meta name="author" content="仓老师机场观察"><meta property="article:published_time" content="2026-09-30T09:19:43&#43;08:00"><meta property="article:modified_time" content="2026-09-30T12:49:30&#43;08:00"><meta property="article:tag" content="VPN"><meta property="article:tag" content="机场指南">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/#article","@type":"BlogPosting","author":{"@type":"Person","name":"仓老师机场观察"},"dateModified":"2026-09-30T12:49:30+08:00","datePublished":"2026-09-30T09:19:43+08:00","description":"Clash规则模式和全局模式怎么选？用一张对照表讲清规则、全局、直连与TUN的区别，说明为什么全局不保证接管所有应用，并提供日常设置与排查方法。","headline":"Clash规则模式和全局模式怎么选？别把TUN当加速开关","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/","@type":"WebPage"},"url":"https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://www.canglaoshi.blog/","name":"仓老师机场观察","position":1},{"@type":"ListItem","item":"https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/","name":"Clash规则模式和全局模式怎么选？别把TUN当加速开关","position":2}]}]}</script>
+<meta name="author" content="仓老师机场观察"><meta property="article:published_time" content="2026-10-04T09:22:57&#43;08:00"><meta property="article:modified_time" content="2026-10-04T09:50:43&#43;08:00"><meta property="article:tag" content="VPN"><meta property="article:tag" content="网络隐私">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://www.canglaoshi.blog/posts/daily-2026-10-04-05-vpn-incognito-privacy/#article","@type":"BlogPosting","author":{"@type":"Person","name":"仓老师机场观察"},"dateModified":"2026-10-04T09:50:43+08:00","datePublished":"2026-10-04T09:22:57+08:00","description":"VPN加无痕模式能完全匿名吗？本文区分本机浏览记录、网络出口和网站账号识别，说明关闭全部私密窗口、下载文件保留及登录后的身份关联。","headline":"VPN加无痕模式就匿名了吗？浏览记录、出口IP与账号的区别","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://www.canglaoshi.blog/posts/daily-2026-10-04-05-vpn-incognito-privacy/","@type":"WebPage"},"url":"https://www.canglaoshi.blog/posts/daily-2026-10-04-05-vpn-incognito-privacy/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://www.canglaoshi.blog/","name":"仓老师机场观察","position":1},{"@type":"ListItem","item":"https://www.canglaoshi.blog/posts/daily-2026-10-04-05-vpn-incognito-privacy/","name":"VPN加无痕模式就匿名了吗？浏览记录、出口IP与账号的区别","position":2}]}]}</script>
 
 <script>(()=>{let mode='system';try{const saved=localStorage.getItem('reader-theme');if(['system','light','dark'].includes(saved))mode=saved}catch{}const root=document.documentElement;root.dataset.colorMode=mode;root.classList.toggle('dark',mode==='dark'||(mode==='system'&&matchMedia('(prefers-color-scheme: dark)').matches))})();</script>
 <link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/style.css">
@@ -66,61 +66,62 @@
 <div class="page-viewport article-viewport"><div class="page-scroll article-scroll">
 <main id="main" tabindex="-1" class="technology-workspace theme-workspace theme-article">
 
-<nav class="breadcrumbs" aria-label="面包屑导航"><ol><li><a href="https://www.canglaoshi.blog/">仓老师机场观察</a></li><li><span aria-current="page">Clash规则模式和全局模式怎么选？别把TUN当加速开关</span></li></ol></nav>
+<nav class="breadcrumbs" aria-label="面包屑导航"><ol><li><a href="https://www.canglaoshi.blog/">仓老师机场观察</a></li><li><span aria-current="page">VPN加无痕模式就匿名了吗？浏览记录、出口IP与账号的区别</span></li></ol></nav>
 
 
 <div class="tech-reading"><div class="article-rail">
-<aside class="toc"><div>本篇目录</div><nav aria-label="文章目录"><a class="level-2" href="#heading">规则、全局、直连，分别管什么？</a><a class="level-2" href="#tun-">TUN 为什么不是另一种全局模式？</a><a class="level-2" href="#heading-1">日常使用，按这三步选择</a><a class="level-2" href="#heading-2">两个常见误会</a></nav></aside>
+<aside class="toc"><div>本篇目录</div><nav aria-label="文章目录"><a class="level-2" href="#heading">无痕模式，到底“痕”在哪里？</a><a class="level-2" href="#vpn">VPN负责另一段连接</a><a class="level-2" href="#heading-1">为什么无痕里网站仍认识你？</a><a class="level-2" href="#heading-2">根据目的使用，别堆开关求玄学</a></nav></aside>
 </div><div class="tech-document">
 <article data-pagefind-body>
 <header class="article-header">
 <div class="eyebrow" data-pagefind-ignore>
 思考记录</div>
-<h1 data-pagefind-meta="title">Clash规则模式和全局模式怎么选？别把TUN当加速开关</h1>
-<div class="metadata" data-pagefind-ignore><span>仓老师机场观察</span><time datetime="2026-09-30T09:19:43&#43;08:00">2026-09-30</time><span><span id="page-views">—</span> 次阅读</span></div>
+<h1 data-pagefind-meta="title">VPN加无痕模式就匿名了吗？浏览记录、出口IP与账号的区别</h1>
+<div class="metadata" data-pagefind-ignore><span>仓老师机场观察</span><time datetime="2026-10-04T09:22:57&#43;08:00">2026-10-04</time><span><span id="page-views">—</span> 次阅读</span></div>
 <div class="chips" data-pagefind-ignore><a href="https://www.canglaoshi.blog/categories/vpn-basics/">VPN入门</a></div>
 </header>
-<div class="prose"><p>**规则模式和全局模式决定流量进来后怎么走，TUN 负责把流量引入客户端。**它们不是三档“网速增压器”。本文以使用 Mihomo 内核的 Clash 类客户端为例；其他 VPN 应用的名称和行为可能不同。</p>
-<p>按钮一多，新手容易全都打开，像把空调设成最低温，指望房间立刻进入冰河时代。网络设置更需要分清每个开关的工作。</p>
-<h2 id="heading">规则、全局、直连，分别管什么？</h2>
+<div class="prose"><p>VPN加无痕模式，不等于完全匿名。无痕模式主要减少这次浏览在本机留下的记录；VPN处理的是选定流量的网络连接。两者可以配合，但你登录账号时，网站照样知道是谁来报到。</p>
+<h2 id="heading">无痕模式，到底“痕”在哪里？</h2>
+<p><a href="https://support.google.com/chrome/answer/95464?hl=en">Chrome官方说明</a>指出，无痕会开启独立会话，关闭全部无痕窗口后不保留该会话的网站数据和浏览记录。不过下载的文件和保存的书签仍会留下，网站仍可能收集信息。</p>
+<p>所以，它更像“不把本次菜单留在桌上”，不是“餐厅从没见过你”。打开第二个无痕窗口也不一定开始全新会话；要结束本次Chrome无痕会话，需要关掉全部无痕窗口。</p>
+<h2 id="vpn">VPN负责另一段连接</h2>
+<p>VPN可以改变被接管流量的出口，让目标网站通常看到服务的出口地址，而不是原网络出口。它不会自动删除浏览器历史，也不会擦掉你发送给网站的用户名、订单或留言。</p>
+<p>机场订阅还要看客户端和分流规则，不能仅凭VPN图标断定所有应用都经过相同路径。覆盖范围不清楚时，可先看本站<a href="https://www.canglaoshi.blog/posts/vpn-vs-airport-proxy-guide/">VPN与机场的区别</a>。</p>
 <table>
 <thead>
 <tr>
-<th>模式</th>
-<th>已进入内核的连接如何处理</th>
+<th>你想解决的问题</th>
+<th>应关注什么</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>规则</td>
-<td>按配置匹配规则，决定代理、直连等策略</td>
+<td>不保留本次本机浏览记录</td>
+<td>私密会话及结束方式</td>
 </tr>
 <tr>
-<td>全局</td>
-<td>交给 GLOBAL 策略组中选择的代理或策略</td>
+<td>改变某个应用的网络出口</td>
+<td>VPN覆盖范围与规则</td>
 </tr>
 <tr>
-<td>直连</td>
-<td>使用直连策略</td>
+<td>不让网站关联账号行为</td>
+<td>是否登录及主动提交资料</td>
+</tr>
+<tr>
+<td>清理已下载文件</td>
+<td>文件本身，而非窗口颜色</td>
 </tr>
 </tbody>
 </table>
-<p>这是 <a href="https://wiki.metacubex.one/config/general/">Mihomo 运行模式文档</a>列出的区别。<strong>“全局”不保证设备上每个应用都已经被接管</strong>，还要看流量是否进入内核；GLOBAL 组的实际选择也要检查，不能只看模式名称。</p>
-<p>规则模式也不会读心。文档说明规则通常按从上到下的顺序匹配，前面的规则优先。某个网站走错路时，应查看命中记录和规则顺序，而不是给节点多点几次“加油”。<a href="https://wiki.metacubex.one/config/rules/">来源：路由规则</a></p>
-<h2 id="tun-">TUN 为什么不是另一种全局模式？</h2>
-<p>TUN 使用虚拟网络接口接收流量，自动路由等设置会影响接入范围；排除网段、应用名单和系统差异也可能影响结果。<a href="https://wiki.metacubex.one/config/inbound/tun/">来源：TUN 文档</a></p>
-<p>可以把 TUN 想成收件窗口，把规则模式想成分拣员：包裹送进窗口后，仍可以分别发往不同出口。所以 <strong>TUN 可以配合规则模式使用</strong>，不是一打开就必须全部走同一个节点。</p>
-<h2 id="heading-1">日常使用，按这三步选择</h2>
-<ol>
-<li>**先明确目标。**列出需要代理的应用，以及希望直连的服务；还没分清客户端和节点，可先看<a href="https://www.canglaoshi.blog/posts/vpn-vs-airport-proxy-guide/">入门说明</a>。</li>
-<li>**用规则模式检查实际连接。**访问目标后，看客户端连接记录中的域名、匹配规则和出口。某个应用没按预期连接，先判断是否接管，再判断分流是否正确。</li>
-<li>**必要时做单项对照。**固定网络和节点，只切换规则与全局，重新发起测试连接。若仅全局正常，优先检查规则及策略组选择；测试后恢复符合日常需求的设置。</li>
-</ol>
-<p>操作前记录原设置。一次改五个开关，就算成功，也很难知道是哪位按钮立了功。</p>
-<h2 id="heading-2">两个常见误会</h2>
-<p>**全局一定更快吗？**不一定。模式主要改变连接策略，不等于购买了更宽的线路；卡顿可继续按<a href="https://www.canglaoshi.blog/posts/vpn-slow-speed-troubleshooting/">速度排查指南</a>定位。</p>
-<p>**规则模式一定省机场流量吗？**只有原本经过服务的部分流量改为直连时，才可能减少相应用量，具体仍看规则与计费口径。</p>
-<p>遇到模式选择问题，可带客户端版本和脱敏截图来交流：<a href="https://t.me/oldsix985">Telegram 联系我</a>，不要附完整订阅地址。</p>
+<h2 id="heading-1">为什么无痕里网站仍认识你？</h2>
+<p><a href="https://support.mozilla.org/en-US/kb/common-myths-about-private-browsing">Mozilla官方文档</a>直接解释，登录会告诉网站你的身份，登录期间的行为可关联到账号；浏览器私密窗口也不等于隐藏IP地址。</p>
+<p>这并不是功能失效，而是你一边戴墨镜，一边把会员卡递到了柜台。即使不登录，网站也可能通过会话数据、设备特征等信号尝试关联访问；具体能力取决于浏览器保护和网站实现，不能保证“不留Cookie就无人认识”。</p>
+<h2 id="heading-2">根据目的使用，别堆开关求玄学</h2>
+<p>临时借用电脑查资料，可以使用私密窗口，完成后退出账号、关闭全部私密窗口，并检查自己保存的文件。涉及不可信设备时，无痕窗口不能替代对设备本身的信任。</p>
+<p>需要网络出口保护时，另外检查VPN连接和目标应用的实际路由。想确认某次登录是否影响账号记录，就查看该网站的账户与活动设置，别指望VPN替网站按撤销键。</p>
+<p>共享设备、网络观察和网站账号识别，是三个不同问题。先说清楚自己希望减少哪一类信息，再选工具，比同时打开五个“隐私增强”按钮更容易判断效果。</p>
+<p>买服务时还应核对运营者、权限和数据说明，参考本站<a href="https://www.canglaoshi.blog/posts/are-free-vpns-safe-privacy-checklist/">免费VPN隐私检查指南</a>。工具有各自边界，理解边界才能用得明白。</p>
+<p><em>作者：仓老师机场观察</em></p>
 </div>
 <div class="article-likes" data-pagefind-ignore>
 <button id="page-like" class="like-button" type="button" aria-pressed="false" aria-describedby="page-like-message" disabled>
@@ -128,8 +129,8 @@
 <span id="page-like-label">点赞</span><span id="page-like-count">—</span>
 </button><p id="page-like-message" role="status"></p>
 </div>
-<div class="article-tags" data-pagefind-ignore><a href="https://www.canglaoshi.blog/tags/vpn/"># VPN</a><a href="https://www.canglaoshi.blog/tags/proxy-guides/"># 机场指南</a></div>
-<nav class="pagination" aria-label="相邻文章" data-pagefind-ignore><a href="https://www.canglaoshi.blog/posts/daily-2026-10-01-vpn-kill-switch/">← 上一篇</a><a href="https://www.canglaoshi.blog/posts/is-100gb-vpn-data-enough/">下一篇 →</a></nav>
+<div class="article-tags" data-pagefind-ignore><a href="https://www.canglaoshi.blog/tags/vpn/"># VPN</a><a href="https://www.canglaoshi.blog/tags/online-privacy/"># 网络隐私</a></div>
+<nav class="pagination" aria-label="相邻文章" data-pagefind-ignore><a href="https://www.canglaoshi.blog/posts/flybit-airport-plans-guide-2026/">← 上一篇</a><a href="https://www.canglaoshi.blog/posts/daily-2026-10-04-04-vpn-captcha-challenges/">下一篇 →</a></nav>
 <section class="comments-section" data-pagefind-ignore><h2>评论</h2><div id="comments"></div></section>
 </article>
 </div></div>
@@ -165,7 +166,7 @@
 </div>
 </dialog>
 
-<script id="blog-comments-config" type="application/json">{"comments":true,"likes":true,"locale":"zh-CN","pageKey":"/p/a59ef5b4-a4c1-4b15-a228-59afd8186c2a/","pageTitle":"Clash规则模式和全局模式怎么选？别把TUN当加速开关","server":"https://upfqpobmiewm.sealosgzg.site","site":"xblog-88abb41f-3510-449d-bb67-00edd9a24e07","views":true,"viewsBase":0}</script>
+<script id="blog-comments-config" type="application/json">{"comments":true,"likes":true,"locale":"zh-CN","pageKey":"/p/fb71beb7-30a5-4974-ace8-09170becf0cd/","pageTitle":"VPN加无痕模式就匿名了吗？浏览记录、出口IP与账号的区别","server":"https://upfqpobmiewm.sealosgzg.site","site":"xblog-88abb41f-3510-449d-bb67-00edd9a24e07","views":true,"viewsBase":0}</script>
 
 </body>
 </html>

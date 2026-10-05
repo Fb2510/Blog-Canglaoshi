@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="technology">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>酒店Wi-Fi开VPN连不上？先处理公共网络网页认证 · 仓老师机场观察</title>
+<meta name="description" content="酒店或公共Wi-Fi开VPN连不上怎么办？先检查强制门户网页认证，了解iPhone网络登录入口及断线保护可能影响认证的情况，按顺序定位网络问题。">
+<meta name="keywords" content="酒店WiFi VPN连不上,公共WiFi网页认证,强制门户,VPN断线保护">
+<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://canglaoshi.blog/posts/daily-2026-10-05-03-public-wifi-captive-portal/">
+<meta property="og:title" content="酒店Wi-Fi开VPN连不上？先处理公共网络网页认证">
+<meta property="og:description" content="酒店或公共Wi-Fi开VPN连不上怎么办？先检查强制门户网页认证，了解iPhone网络登录入口及断线保护可能影响认证的情况，按顺序定位网络问题。">
+<meta property="og:url" content="https://canglaoshi.blog/posts/daily-2026-10-05-03-public-wifi-captive-portal/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="仓老师机场观察">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png"><meta property="og:image:alt" content="仓老师机场观察">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="酒店Wi-Fi开VPN连不上？先处理公共网络网页认证">
+<meta name="twitter:description" content="酒店或公共Wi-Fi开VPN连不上怎么办？先检查强制门户网页认证，了解iPhone网络登录入口及断线保护可能影响认证的情况，按顺序定位网络问题。">
+<meta name="twitter:image" content="https://canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
+<meta name="author" content="仓老师机场观察"><meta property="article:published_time" content="2026-10-05T09:25:03&#43;08:00"><meta property="article:modified_time" content="2026-10-05T15:52:03&#43;08:00"><meta property="article:tag" content="VPN">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://canglaoshi.blog/posts/daily-2026-10-05-03-public-wifi-captive-portal/#article","@type":"BlogPosting","author":{"@type":"Person","name":"仓老师机场观察"},"dateModified":"2026-10-05T15:52:03+08:00","datePublished":"2026-10-05T09:25:03+08:00","description":"酒店或公共Wi-Fi开VPN连不上怎么办？先检查强制门户网页认证，了解iPhone网络登录入口及断线保护可能影响认证的情况，按顺序定位网络问题。","headline":"酒店Wi-Fi开VPN连不上？先处理公共网络网页认证","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://canglaoshi.blog/posts/daily-2026-10-05-03-public-wifi-captive-portal/","@type":"WebPage"},"url":"https://canglaoshi.blog/posts/daily-2026-10-05-03-public-wifi-captive-portal/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://canglaoshi.blog/","name":"仓老师机场观察","position":1},{"@type":"ListItem","item":"https://canglaoshi.blog/posts/daily-2026-10-05-03-public-wifi-captive-portal/","name":"酒店Wi-Fi开VPN连不上？先处理公共网络网页认证","position":2}]}]}</script>
+
+<script>(()=>{let mode='system';try{const saved=localStorage.getItem('reader-theme');if(['system','light','dark'].includes(saved))mode=saved}catch{}const root=document.documentElement;root.dataset.colorMode=mode;root.classList.toggle('dark',mode==='dark'||(mode==='system'&&matchMedia('(prefers-color-scheme: dark)').matches))})();</script>
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/style.css">
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/advertisements.css">
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/search.css"><script defer src="https://canglaoshi.blog/assets/theme/search.js"></script>
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/layouts.css"><link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/effects.css"><link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/skin.css">
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/viewer.css">
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/reader.css">
+<link rel="icon" href="https://canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/artalk.css"><script defer src="https://canglaoshi.blog/assets/theme/artalk.js"></script>
+<script defer src="https://canglaoshi.blog/assets/theme/theme.js"></script>
+<script defer src="https://canglaoshi.blog/assets/theme/reader.js"></script>
+<script defer src="https://canglaoshi.blog/assets/theme/viewer.js"></script>
+<script defer src="https://canglaoshi.blog/assets/theme/image-viewer.js"></script>
+
+<script defer src="https://canglaoshi.blog/assets/theme/interactions.js"></script>
+
+<meta name="msvalidate.01" content="3D562902FFD6655EA5B649095B7D8365" />
+
+</head>
+
+<body class="reader-page theme-technology article-page">
+<a class="skip" href="#main">跳到正文</a>
+
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" href="https://canglaoshi.blog/"><img src="https://canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png" alt="" width="38" height="38"><span>仓老师机场观察</span></a>
+<nav id="site-navigation" aria-label="站点导航"><a href="https://canglaoshi.blog/">首页</a></nav>
+<a class="search-toggle" href="https://canglaoshi.blog/search/" data-open-dialog="search-dialog" aria-haspopup="dialog" aria-controls="search-dialog" aria-label="搜索" title="搜索"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></a>
+<button id="theme-mode" class="theme-toggle theme-cycle" type="button" aria-label="明暗模式：跟随系统，点击切换为明亮" title="跟随系统 · 点击切换为明亮">
+<svg class="theme-icon-system" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+<svg class="theme-icon-moon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 15.5A8.5 8.5 0 0 1 8.5 3.8 8.5 8.5 0 1 0 20.2 15.5Z"/></svg>
+<svg class="theme-icon-sun" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
+<span id="theme-mode-status" class="visually-hidden" role="status" aria-live="polite"></span>
+<button id="menu-toggle" class="menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="打开菜单" title="打开菜单">
+<svg class="menu-icon-open" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+<svg class="menu-icon-close" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg>
+</button>
+</div>
+</header>
+
+<div class="page-viewport article-viewport"><div class="page-scroll article-scroll">
+<main id="main" tabindex="-1" class="technology-workspace theme-workspace theme-article">
+
+<nav class="breadcrumbs" aria-label="面包屑导航"><ol><li><a href="https://canglaoshi.blog/">仓老师机场观察</a></li><li><span aria-current="page">酒店Wi-Fi开VPN连不上？先处理公共网络网页认证</span></li></ol></nav>
+
+
+<div class="tech-reading"><div class="article-rail">
+<aside class="toc"><div>本篇目录</div><nav aria-label="文章目录"><a class="level-2" href="#heading">先识别网页认证这道门</a><a class="level-2" href="#heading-1">按顺序排查，比轮流换节点有效</a><a class="level-3" href="#heading-2">一、确认连接对象</a><a class="level-3" href="#heading-3">二、完成网络登录</a><a class="level-3" href="#vpn">三、确认联网后再连接VPN</a><a class="level-2" href="#heading-4">断线保护会不会挡住认证页？</a><a class="level-2" href="#heading-5">为什么刚才可用，回来又要登录？</a></nav></aside>
+</div><div class="tech-document">
+<article data-pagefind-body>
+<header class="article-header">
+<div class="eyebrow" data-pagefind-ignore>
+思考记录</div>
+<h1 data-pagefind-meta="title">酒店Wi-Fi开VPN连不上？先处理公共网络网页认证</h1>
+<div class="metadata" data-pagefind-ignore><span>仓老师机场观察</span><time datetime="2026-10-05T09:25:03&#43;08:00">2026-10-05</time><span><span id="page-views">—</span> 次阅读</span></div>
+<div class="chips" data-pagefind-ignore><a href="https://canglaoshi.blog/categories/network-troubleshooting/">网络排障</a></div>
+</header>
+<div class="prose"><p>酒店或机场Wi-Fi显示已连接，VPN却一直转圈，先检查是否还没完成网页认证。连上无线网络与获得互联网访问权限是两步；Wi-Fi密码像门禁卡，欢迎页才可能是前台登记。</p>
+<h2 id="heading">先识别网页认证这道门</h2>
+<p>部分公共网络需要在欢迎页填写账号、接受条款或确认访问权限。<a href="https://support.apple.com/en-us/102554">Apple的公共Wi-Fi说明</a>介绍了这类认证网络：选择网络后，等待登录界面并完成要求，才可正常访问互联网。</p>
+<p>所以，信号满格不代表手续齐全。浏览器出现酒店欢迎页、系统提示“登录网络”，都值得先处理；也别仅凭“无互联网”提示就宣布VPN节点失踪。</p>
+<h2 id="heading-1">按顺序排查，比轮流换节点有效</h2>
+<h3 id="heading-2">一、确认连接对象</h3>
+<p>向场所工作人员核对网络名称和正规认证入口，避免只看名字相似就连接。认证页索取的信息应与场所服务相符，不应拿邮箱或支付账号密码来代替酒店上网凭据。</p>
+<h3 id="heading-3">二、完成网络登录</h3>
+<p>打开系统的网络登录提示。在iPhone或iPad上，可进入Wi-Fi设置，选择对应网络，必要时使用其信息页中的加入网络入口。其他设备按系统提示处理，菜单名称可能不同。</p>
+<h3 id="vpn">三、确认联网后再连接VPN</h3>
+<p>完成认证后，先确认能正常访问互联网，再启用VPN并测试需要的应用。若普通访问仍失败，优先联系网络运营方；若只有VPN失败，再检查该产品的连接日志和可用协议。</p>
+<h2 id="heading-4">断线保护会不会挡住认证页？</h2>
+<p>某些“必须经过VPN”的策略可能让认证页难以打开，具体取决于客户端与系统。先查产品是否提供公共网络登录的处理方式，别把关闭所有保护当成固定第一步。</p>
+<p>Apple的<a href="https://support.apple.com/en-mide/guide/deployment/dep00e2509ce/web">受管理设备Always-on VPN配置文档</a>列有认证页面流量例外，说明这类场景需要专门处理。它是特定设备管理配置，不能当作每个个人VPN应用都有的按钮。</p>
+<p>公司管理的设备应按管理员要求处理。个人设备若依照产品说明暂时断开VPN完成认证，期间只做网络登录，随后重新连接并确认保护状态。相关概念可看本站<a href="https://www.canglaoshi.blog/posts/daily-2026-10-01-vpn-kill-switch/">断线保护排查指南</a>。</p>
+<h2 id="heading-5">为什么刚才可用，回来又要登录？</h2>
+<p>网络运营方可能要求重新认证，设备也可能没有自动登录。重新出现欢迎页时，先确认网络身份并完成流程，别急着给订阅续费。先过前台，再谈隧道，排查顺序通常能省掉一半“瞎忙”。</p>
+<p>作者：仓老师机场观察</p>
+</div>
+<div class="article-likes" data-pagefind-ignore>
+<button id="page-like" class="like-button" type="button" aria-pressed="false" aria-describedby="page-like-message" disabled>
+<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+<span id="page-like-label">点赞</span><span id="page-like-count">—</span>
+</button><p id="page-like-message" role="status"></p>
+</div>
+<div class="article-tags" data-pagefind-ignore><a href="https://canglaoshi.blog/tags/vpn/"># VPN</a></div>
+<nav class="pagination" aria-label="相邻文章" data-pagefind-ignore><a href="https://canglaoshi.blog/posts/daily-2026-10-05-04-url-test-fallback-choice/">← 上一篇</a><a href="https://canglaoshi.blog/posts/daily-2026-10-05-02-phone-hotspot-vpn-sharing/">下一篇 →</a></nav>
+<section class="comments-section" data-pagefind-ignore><h2>评论</h2><div id="comments"></div></section>
+</article>
+</div></div>
+
+</main>
+</div>
+<button id="back-to-top" class="back-to-top" type="button" aria-label="返回顶部" title="返回顶部" hidden>
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M12 20V8m-5 5 5-5 5 5"/></svg>
+</button>
+</div>
+
+<footer class="site-footer">
+<nav class="friend-links" aria-label="友情链接"><span class="friend-links-label">友情链接</span><a href="https://goflybit.com/#/register?code=VDhOlcf4" target="_blank" rel="noopener noreferrer">FlyBit机场</a><a href="https://home.99ba2026.best/#/register?code=lsE7jbti" target="_blank" rel="noopener noreferrer">99吧</a><a href="https://t.me/@oldsix985" target="_blank" rel="noopener noreferrer">Telegram联系我</a></nav>
+<span>© 仓老师机场观察</span>
+</footer>
+
+
+
+<dialog id="search-dialog" class="reader-dialog site-search" aria-labelledby="search-title" data-reader-dialog data-pagefind-ignore>
+<header class="reader-dialog-header"><h2 id="search-title">搜索文章</h2><button class="dialog-close" type="button" data-close-dialog aria-label="关闭搜索" title="关闭搜索">×</button></header>
+<div class="reader-dialog-body">
+
+<div id="site-search-ui" data-module="https://canglaoshi.blog/pagefind/pagefind-component-ui.js" data-stylesheet="https://canglaoshi.blog/pagefind/pagefind-component-ui.css" hidden>
+
+<pagefind-config bundle-path="https://canglaoshi.blog/pagefind/" base-url="https://canglaoshi.blog/" lang="zh-cn" no-worker></pagefind-config>
+<pagefind-input placeholder="搜索文章标题或正文"></pagefind-input>
+<pagefind-summary></pagefind-summary>
+<pagefind-results></pagefind-results>
+</div>
+<p id="search-status" class="search-status" role="status">正在加载搜索…</p>
+<button id="search-retry" class="button" type="button" hidden>重新加载</button>
+
+</div>
+</dialog>
+
+<script id="blog-comments-config" type="application/json">{"comments":true,"likes":true,"locale":"zh-CN","pageKey":"/p/b4921b66-d8bb-4e5f-9789-0c30927cbf97/","pageTitle":"酒店Wi-Fi开VPN连不上？先处理公共网络网页认证","server":"https://upfqpobmiewm.sealosgzg.site","site":"xblog-88abb41f-3510-449d-bb67-00edd9a24e07","views":true,"viewsBase":0}</script>
+
+</body>
+</html>

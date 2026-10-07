@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="technology">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>安卓锁屏后VPN为什么断开？后台运行与电池设置排查 · 仓老师机场观察</title>
+<meta name="description" content="安卓手机锁屏后VPN断开怎么办？按连接日志、后台运行与电池管理逐步排查，理解Doze、始终开启VPN和断线保护的区别，不把某个旧版菜单套用于所有手机。">
+<meta name="keywords" content="安卓VPN锁屏断开,VPN后台掉线,Android电池优化,VPN后台运行">
+<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://www.canglaoshi.blog/posts/daily-2026-10-06-02-android-vpn-background-disconnect/">
+<meta property="og:title" content="安卓锁屏后VPN为什么断开？后台运行与电池设置排查">
+<meta property="og:description" content="安卓手机锁屏后VPN断开怎么办？按连接日志、后台运行与电池管理逐步排查，理解Doze、始终开启VPN和断线保护的区别，不把某个旧版菜单套用于所有手机。">
+<meta property="og:url" content="https://www.canglaoshi.blog/posts/daily-2026-10-06-02-android-vpn-background-disconnect/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="仓老师机场观察">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png"><meta property="og:image:alt" content="仓老师机场观察">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓锁屏后VPN为什么断开？后台运行与电池设置排查">
+<meta name="twitter:description" content="安卓手机锁屏后VPN断开怎么办？按连接日志、后台运行与电池管理逐步排查，理解Doze、始终开启VPN和断线保护的区别，不把某个旧版菜单套用于所有手机。">
+<meta name="twitter:image" content="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
+<meta name="author" content="仓老师机场观察"><meta property="article:published_time" content="2026-10-06T09:20:49&#43;08:00"><meta property="article:modified_time" content="2026-10-08T00:16:41&#43;08:00"><meta property="article:tag" content="VPN">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://www.canglaoshi.blog/posts/daily-2026-10-06-02-android-vpn-background-disconnect/#article","@type":"BlogPosting","author":{"@type":"Person","name":"仓老师机场观察"},"dateModified":"2026-10-08T00:16:41+08:00","datePublished":"2026-10-06T09:20:49+08:00","description":"安卓手机锁屏后VPN断开怎么办？按连接日志、后台运行与电池管理逐步排查，理解Doze、始终开启VPN和断线保护的区别，不把某个旧版菜单套用于所有手机。","headline":"安卓锁屏后VPN为什么断开？后台运行与电池设置排查","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://www.canglaoshi.blog/posts/daily-2026-10-06-02-android-vpn-background-disconnect/","@type":"WebPage"},"url":"https://www.canglaoshi.blog/posts/daily-2026-10-06-02-android-vpn-background-disconnect/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://www.canglaoshi.blog/","name":"仓老师机场观察","position":1},{"@type":"ListItem","item":"https://www.canglaoshi.blog/posts/daily-2026-10-06-02-android-vpn-background-disconnect/","name":"安卓锁屏后VPN为什么断开？后台运行与电池设置排查","position":2}]}]}</script>
+
+<script>(()=>{let mode='system';try{const saved=localStorage.getItem('reader-theme');if(['system','light','dark'].includes(saved))mode=saved}catch{}const root=document.documentElement;root.dataset.colorMode=mode;root.classList.toggle('dark',mode==='dark'||(mode==='system'&&matchMedia('(prefers-color-scheme: dark)').matches))})();</script>
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/style.css">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/advertisements.css">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/search.css"><script defer src="https://www.canglaoshi.blog/assets/theme/search.js"></script>
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/layouts.css"><link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/effects.css"><link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/skin.css">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/viewer.css">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/reader.css">
+<link rel="icon" href="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/artalk.css"><script defer src="https://www.canglaoshi.blog/assets/theme/artalk.js"></script>
+<script defer src="https://www.canglaoshi.blog/assets/theme/theme.js"></script>
+<script defer src="https://www.canglaoshi.blog/assets/theme/reader.js"></script>
+<script defer src="https://www.canglaoshi.blog/assets/theme/viewer.js"></script>
+<script defer src="https://www.canglaoshi.blog/assets/theme/image-viewer.js"></script>
+
+<script defer src="https://www.canglaoshi.blog/assets/theme/interactions.js"></script>
+
+<meta name="msvalidate.01" content="3D562902FFD6655EA5B649095B7D8365" />
+
+</head>
+
+<body class="reader-page theme-technology article-page">
+<a class="skip" href="#main">跳到正文</a>
+
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" href="https://www.canglaoshi.blog/"><img src="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png" alt="" width="38" height="38"><span>仓老师机场观察</span></a>
+<nav id="site-navigation" aria-label="站点导航"><a href="https://www.canglaoshi.blog/">首页</a></nav>
+<a class="search-toggle" href="https://www.canglaoshi.blog/search/" data-open-dialog="search-dialog" aria-haspopup="dialog" aria-controls="search-dialog" aria-label="搜索" title="搜索"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></a>
+<button id="theme-mode" class="theme-toggle theme-cycle" type="button" aria-label="明暗模式：跟随系统，点击切换为明亮" title="跟随系统 · 点击切换为明亮">
+<svg class="theme-icon-system" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+<svg class="theme-icon-moon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 15.5A8.5 8.5 0 0 1 8.5 3.8 8.5 8.5 0 1 0 20.2 15.5Z"/></svg>
+<svg class="theme-icon-sun" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
+<span id="theme-mode-status" class="visually-hidden" role="status" aria-live="polite"></span>
+<button id="menu-toggle" class="menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="打开菜单" title="打开菜单">
+<svg class="menu-icon-open" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+<svg class="menu-icon-close" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg>
+</button>
+</div>
+</header>
+
+<div class="page-viewport article-viewport"><div class="page-scroll article-scroll">
+<main id="main" tabindex="-1" class="technology-workspace theme-workspace theme-article">
+
+<nav class="breadcrumbs" aria-label="面包屑导航"><ol><li><a href="https://www.canglaoshi.blog/">仓老师机场观察</a></li><li><span aria-current="page">安卓锁屏后VPN为什么断开？后台运行与电池设置排查</span></li></ol></nav>
+
+
+<div class="tech-reading"><div class="article-rail">
+<aside class="toc"><div>本篇目录</div><nav aria-label="文章目录"><a class="level-2" href="#heading">为什么亮屏正常，锁屏就掉线？</a><a class="level-2" href="#heading-1">先做一次有记录的锁屏对照</a><a class="level-2" href="#heading-2">电池设置怎样查，才不越改越乱？</a><a class="level-2" href="#vpn">始终开启VPN，等于后台不会被关闭吗？</a><a class="level-2" href="#heading-3">资料来源</a></nav></aside>
+</div><div class="tech-document">
+<article data-pagefind-body>
+<header class="article-header">
+<div class="eyebrow" data-pagefind-ignore>
+思考记录</div>
+<h1 data-pagefind-meta="title">安卓锁屏后VPN为什么断开？后台运行与电池设置排查</h1>
+<div class="metadata" data-pagefind-ignore><span>仓老师机场观察</span><time datetime="2026-10-06T09:20:49&#43;08:00">2026-10-06</time><span><span id="page-views">—</span> 次阅读</span></div>
+<div class="chips" data-pagefind-ignore><a href="https://www.canglaoshi.blog/categories/network-troubleshooting/">网络排障</a></div>
+</header>
+<div class="prose"><p>安卓手机锁屏后VPN断开，先检查后台运行与电池管理，再判断是否属于网络或节点故障。若每次熄屏一段时间后出问题、打开应用又恢复，后台限制值得优先核查；不过，这个现象本身还不能证明是谁动了手。</p>
+<h2 id="heading">为什么亮屏正常，锁屏就掉线？</h2>
+<p><a href="https://developer.android.com/training/monitoring-device-state/doze-standby">Android的Doze文档</a>介绍了空闲时对应用网络访问和后台任务的限制。客户端如何适配、是否获得例外，以及厂商的管理方式，都会影响实际表现，不能理解成“安卓锁屏必断VPN”。</p>
+<p><a href="https://protonvpn.com/support/android-killing-proton-vpn">Proton VPN的排障说明</a>还指出，部分设备或省电应用可能关闭后台VPN进程。省电管家有时像过于勤快的保洁：灯关了，就想把仍在值班的人也请出去。</p>
+<h2 id="heading-1">先做一次有记录的锁屏对照</h2>
+<p>固定网络和节点，确认VPN已经连接，记录时间后锁屏。解锁时先查看连接状态、通知和日志，再打开客户端，避免应用重新连接后把原来的故障现场盖住。</p>
+<p>重复同条件观察，记录断开发生在锁屏期间还是网络切换之后。如果亮屏使用也会断，或同一时间其他设备也异常，就不应只盯电池设置。问题出在公路上，不能让手机保洁背所有锅。</p>
+<h2 id="heading-2">电池设置怎样查，才不越改越乱？</h2>
+<p>进入系统设置中该VPN应用的详情页，查看电池、后台活动或后台运行相关选项。名称随系统版本和厂商变化，以本机菜单及客户端官方说明为准。</p>
+<p>Proton的文档以三星旧版系统中的“不受限制”选项举例，可以参考思路，不能把旧菜单路径当作所有手机的通用导航。如果安装了第三方省电工具，也查看它是否把VPN列入关闭或限制名单。</p>
+<p>只针对需要持续运行的客户端调整，一次改一项，记录原值后再做锁屏对照。无需为了查一个应用，把所有应用都设为无限制。若调整后没有改善，保留结果并继续检查网络和客户端日志。</p>
+<h2 id="vpn">始终开启VPN，等于后台不会被关闭吗？</h2>
+<p>“始终开启”、后台运行权限和断线保护解决的问题不同。Android提供始终开启VPN的机制，但连接服务仍可能中断，不能把设置名称当作永不掉线的保证。</p>
+<p>如果断线后整台手机上不了网，还要检查是否启用了阻止非VPN连接的策略，见本站<a href="https://www.canglaoshi.blog/posts/daily-2026-10-01-vpn-kill-switch/">断线保护排查指南</a>。提交求助时，带上机型、系统与客户端版本、锁屏时长及相关日志，比一句“手机又睡着了”更容易定位。</p>
+<p>作者：仓老师机场观察</p>
+<h2 id="heading-3">资料来源</h2>
+<p>资料核对日期：2026年10月6日。菜单示例可能随系统更新变化，不声称所有机型行为相同。</p>
+<ul>
+<li><a href="https://developer.android.com/training/monitoring-device-state/doze-standby">Android Developers：Doze与App Standby</a></li>
+<li><a href="https://protonvpn.com/support/android-killing-proton-vpn">Proton VPN：Android后台关闭VPN的排查</a>，文中三星菜单示例基于One UI 4.1、Android 12。</li>
+<li><a href="https://developer.android.com/develop/connectivity/vpn">Android Developers：VPN与始终开启机制</a></li>
+</ul>
+</div>
+<div class="article-likes" data-pagefind-ignore>
+<button id="page-like" class="like-button" type="button" aria-pressed="false" aria-describedby="page-like-message" disabled>
+<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+<span id="page-like-label">点赞</span><span id="page-like-count">—</span>
+</button><p id="page-like-message" role="status"></p>
+</div>
+<div class="article-tags" data-pagefind-ignore><a href="https://www.canglaoshi.blog/tags/vpn/"># VPN</a></div>
+<nav class="pagination" aria-label="相邻文章" data-pagefind-ignore><a href="https://www.canglaoshi.blog/posts/daily-2026-10-06-03-mbps-mbs-speed-units/">← 上一篇</a><a href="https://www.canglaoshi.blog/posts/daily-2026-10-06-01-browser-extension-vpn-scope/">下一篇 →</a></nav>
+<section class="comments-section" data-pagefind-ignore><h2>评论</h2><div id="comments"></div></section>
+</article>
+</div></div>
+
+</main>
+</div>
+<button id="back-to-top" class="back-to-top" type="button" aria-label="返回顶部" title="返回顶部" hidden>
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M12 20V8m-5 5 5-5 5 5"/></svg>
+</button>
+</div>
+
+<footer class="site-footer">
+<nav class="friend-links" aria-label="友情链接"><span class="friend-links-label">友情链接</span><a href="https://goflybit.com/#/register?code=VDhOlcf4" target="_blank" rel="noopener noreferrer">FlyBit机场</a><a href="https://home.99ba2026.best/#/register?code=lsE7jbti" target="_blank" rel="noopener noreferrer">99吧</a><a href="https://t.me/@oldsix985" target="_blank" rel="noopener noreferrer">Telegram联系我</a></nav>
+<span>© 仓老师机场观察</span>
+</footer>
+
+
+
+<dialog id="search-dialog" class="reader-dialog site-search" aria-labelledby="search-title" data-reader-dialog data-pagefind-ignore>
+<header class="reader-dialog-header"><h2 id="search-title">搜索文章</h2><button class="dialog-close" type="button" data-close-dialog aria-label="关闭搜索" title="关闭搜索">×</button></header>
+<div class="reader-dialog-body">
+
+<div id="site-search-ui" data-module="https://www.canglaoshi.blog/pagefind/pagefind-component-ui.js" data-stylesheet="https://www.canglaoshi.blog/pagefind/pagefind-component-ui.css" hidden>
+
+<pagefind-config bundle-path="https://www.canglaoshi.blog/pagefind/" base-url="https://www.canglaoshi.blog/" lang="zh-cn" no-worker></pagefind-config>
+<pagefind-input placeholder="搜索文章标题或正文"></pagefind-input>
+<pagefind-summary></pagefind-summary>
+<pagefind-results></pagefind-results>
+</div>
+<p id="search-status" class="search-status" role="status">正在加载搜索…</p>
+<button id="search-retry" class="button" type="button" hidden>重新加载</button>
+
+</div>
+</dialog>
+
+<script id="blog-comments-config" type="application/json">{"comments":true,"likes":true,"locale":"zh-CN","pageKey":"/p/eaf8e793-f19d-4e90-b894-b9f78757f2c4/","pageTitle":"安卓锁屏后VPN为什么断开？后台运行与电池设置排查","server":"https://upfqpobmiewm.sealosgzg.site","site":"xblog-88abb41f-3510-449d-bb67-00edd9a24e07","views":true,"viewsBase":0}</script>
+
+</body>
+</html>

@@ -20,7 +20,7 @@
 <meta name="twitter:description" content="认识网速、延迟、抖动与网络测试方法。">
 <meta name="twitter:image" content="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://www.canglaoshi.blog/tags/network-speed/#collection","@type":"CollectionPage","description":"认识网速、延迟、抖动与网络测试方法。","inLanguage":"zh-CN","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","name":"Clash自动选节点和故障切换有何区别？url-test与fallback怎么选","position":1,"url":"https://www.canglaoshi.blog/posts/daily-2026-10-05-04-url-test-fallback-choice/"},{"@type":"ListItem","name":"VPN节点延迟很低，游戏却卡？先看测速目标是不是游戏服务器","position":2,"url":"https://www.canglaoshi.blog/posts/daily-2026-10-04-02-game-latency-test-target/"},{"@type":"ListItem","name":"VPN速度慢怎么办？机场节点卡顿的5步排查指南","position":3,"url":"https://www.canglaoshi.blog/posts/vpn-slow-speed-troubleshooting/"}]},"name":"网络测速","url":"https://www.canglaoshi.blog/tags/network-speed/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://www.canglaoshi.blog/","name":"仓老师机场观察","position":1},{"@type":"ListItem","item":"https://www.canglaoshi.blog/tags/network-speed/","name":"网络测速","position":2}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://www.canglaoshi.blog/tags/network-speed/#collection","@type":"CollectionPage","description":"认识网速、延迟、抖动与网络测试方法。","inLanguage":"zh-CN","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","name":"机场节点ping超时就是离线吗？ICMP、客户端测试与实际访问的区别","position":1,"url":"https://www.canglaoshi.blog/posts/daily-2026-10-07-02-node-ping-timeout/"},{"@type":"ListItem","name":"VPN测速100Mbps，下载为什么只有十几MB/s？网速单位换算","position":2,"url":"https://www.canglaoshi.blog/posts/daily-2026-10-06-03-mbps-mbs-speed-units/"},{"@type":"ListItem","name":"Clash自动选节点和故障切换有何区别？url-test与fallback怎么选","position":3,"url":"https://www.canglaoshi.blog/posts/daily-2026-10-05-04-url-test-fallback-choice/"},{"@type":"ListItem","name":"VPN节点延迟很低，游戏却卡？先看测速目标是不是游戏服务器","position":4,"url":"https://www.canglaoshi.blog/posts/daily-2026-10-04-02-game-latency-test-target/"},{"@type":"ListItem","name":"VPN速度慢怎么办？机场节点卡顿的5步排查指南","position":5,"url":"https://www.canglaoshi.blog/posts/vpn-slow-speed-troubleshooting/"}]},"name":"网络测速","url":"https://www.canglaoshi.blog/tags/network-speed/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://www.canglaoshi.blog/","name":"仓老师机场观察","position":1},{"@type":"ListItem","item":"https://www.canglaoshi.blog/tags/network-speed/","name":"网络测速","position":2}]}]}</script>
 
 <script>(()=>{let mode='system';try{const saved=localStorage.getItem('reader-theme');if(['system','light','dark'].includes(saved))mode=saved}catch{}const root=document.documentElement;root.dataset.colorMode=mode;root.classList.toggle('dark',mode==='dark'||(mode==='system'&&matchMedia('(prefers-color-scheme: dark)').matches))})();</script>
 <link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/style.css">
@@ -77,9 +77,43 @@
 
 <div class="theme-list-heading">
 <span class="theme-list-title">最新记录</span>
-<span class="theme-list-count">本页 3 篇</span>
+<span class="theme-list-count">本页 5 篇</span>
 </div>
 <section class="article-list technology-entries" aria-label="文章列表"><article class="article-card tech-entry">
+<span class="card-index" aria-hidden="true">
+</span>
+<div class="tech-entry-body">
+<div class="entry-categories"><a class="card-category" href="https://www.canglaoshi.blog/categories/network-troubleshooting/">网络排障</a></div>
+<h2>
+<a href="https://www.canglaoshi.blog/posts/daily-2026-10-07-02-node-ping-timeout/">机场节点ping超时就是离线吗？ICMP、客户端测试与实际访问的区别</a></h2>
+<p class="card-summary">ping超时不能单独证明机场节点离线，成功也不能证明代理认证和目标访问正常。分清ICMP、客户端健康检查与真实业务，按同条件对照记录有效排障信息。</p>
+<div class="tech-entry-footer">
+<div class="card-meta">
+<span>仓老师机场观察</span>
+<time datetime="2026-10-07T09:21:18&#43;08:00">2026-10-07</time>
+</div>
+<a class="read-more" href="https://www.canglaoshi.blog/posts/daily-2026-10-07-02-node-ping-timeout/" aria-label="阅读机场节点ping超时就是离线吗？ICMP、客户端测试与实际访问的区别">展开记录 <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+</article><article class="article-card tech-entry">
+<span class="card-index" aria-hidden="true">
+</span>
+<div class="tech-entry-body">
+<div class="entry-categories"><a class="card-category" href="https://www.canglaoshi.blog/categories/vpn-basics/">VPN入门</a></div>
+<h2>
+<a href="https://www.canglaoshi.blog/posts/daily-2026-10-06-03-mbps-mbs-speed-units/">VPN测速100Mbps，下载为什么只有十几MB/s？网速单位换算</a></h2>
+<p class="card-summary">Mbps与MB/s相差八倍，100Mbps换算为12.5MB/s。通过单位表与用时示例，分清速率、套餐容量和延迟，并检查测速位置是否与实际下载一致。</p>
+<div class="tech-entry-footer">
+<div class="card-meta">
+<span>仓老师机场观察</span>
+<time datetime="2026-10-06T09:20:57&#43;08:00">2026-10-06</time>
+</div>
+<a class="read-more" href="https://www.canglaoshi.blog/posts/daily-2026-10-06-03-mbps-mbs-speed-units/" aria-label="阅读VPN测速100Mbps，下载为什么只有十几MB/s？网速单位换算">展开记录 <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+</article><article class="article-card tech-entry">
 <span class="card-index" aria-hidden="true">
 </span>
 <div class="tech-entry-body">

@@ -2,39 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.canglaoshi.blog/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/categories/network-troubleshooting/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/categories/network-troubleshooting/page/2/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/categories/proxy-buying-guides/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/categories/vpn-basics/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/categories/vpn-basics/page/2/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/page/2/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/page/3/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/page/4/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.canglaoshi.blog/page/5/</loc>
+    <lastmod>2026-10-14T08:00:26Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/posts/are-free-vpns-safe-privacy-checklist/</loc>
@@ -174,11 +178,19 @@
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/posts/daily-2026-10-12-02-vpn-device-connection-limits/</loc>
-    <lastmod>2026-10-12T13:00:27Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.canglaoshi.blog/posts/daily-2026-10-14-01-vpn-gps-location-permissions/</loc>
+    <lastmod>2026-10-14T08:00:26Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.canglaoshi.blog/posts/daily-2026-10-14-02-windows-stale-system-proxy/</loc>
+    <lastmod>2026-10-14T08:00:25Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/posts/flybit-airport-plans-guide-2026/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/posts/how-to-choose-vpn-proxy-service/</loc>
@@ -198,7 +210,7 @@
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/tags/data-budget/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/tags/network-speed/</loc>
@@ -206,34 +218,34 @@
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/tags/online-privacy/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/tags/online-privacy/page/2/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/tags/proxy-guides/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/tags/proxy-guides/page/2/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/tags/vpn/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/tags/vpn/page/2/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/tags/vpn/page/3/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
   <url>
     <loc>https://www.canglaoshi.blog/tags/vpn/page/4/</loc>
-    <lastmod>2026-10-12T13:00:45Z</lastmod>
+    <lastmod>2026-10-14T08:00:35Z</lastmod>
   </url>
 </urlset>

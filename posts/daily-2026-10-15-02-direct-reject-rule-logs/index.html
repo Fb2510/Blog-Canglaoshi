@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="technology">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>代理日志显示DIRECT或REJECT？命中规则排查指南 · 仓老师机场观察</title>
+<meta name="description" content="代理日志里的DIRECT和REJECT是什么意思？对照直连、拒绝与静默丢弃，按请求域名、命中规则和实际出站逐步排查，判断问题来自分流设置还是连接本身。">
+<meta name="keywords" content="代理日志,DIRECT是什么意思,REJECT是什么意思,分流规则,机场连接排查">
+<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://canglaoshi.blog/posts/daily-2026-10-15-02-direct-reject-rule-logs/">
+<meta property="og:title" content="代理日志显示DIRECT或REJECT？命中规则排查指南">
+<meta property="og:description" content="代理日志里的DIRECT和REJECT是什么意思？对照直连、拒绝与静默丢弃，按请求域名、命中规则和实际出站逐步排查，判断问题来自分流设置还是连接本身。">
+<meta property="og:url" content="https://canglaoshi.blog/posts/daily-2026-10-15-02-direct-reject-rule-logs/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="仓老师机场观察">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png"><meta property="og:image:alt" content="仓老师机场观察">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="代理日志显示DIRECT或REJECT？命中规则排查指南">
+<meta name="twitter:description" content="代理日志里的DIRECT和REJECT是什么意思？对照直连、拒绝与静默丢弃，按请求域名、命中规则和实际出站逐步排查，判断问题来自分流设置还是连接本身。">
+<meta name="twitter:image" content="https://canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
+<meta name="author" content="仓老师机场观察"><meta property="article:published_time" content="2026-10-15T09:19:53&#43;08:00"><meta property="article:modified_time" content="2026-10-15T22:36:34&#43;08:00"><meta property="article:tag" content="VPN"><meta property="article:tag" content="机场指南">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://canglaoshi.blog/posts/daily-2026-10-15-02-direct-reject-rule-logs/#article","@type":"BlogPosting","author":{"@type":"Person","name":"仓老师机场观察"},"dateModified":"2026-10-15T22:36:34+08:00","datePublished":"2026-10-15T09:19:53+08:00","description":"代理日志里的DIRECT和REJECT是什么意思？对照直连、拒绝与静默丢弃，按请求域名、命中规则和实际出站逐步排查，判断问题来自分流设置还是连接本身。","headline":"代理日志显示DIRECT或REJECT？命中规则排查指南","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://canglaoshi.blog/posts/daily-2026-10-15-02-direct-reject-rule-logs/","@type":"WebPage"},"url":"https://canglaoshi.blog/posts/daily-2026-10-15-02-direct-reject-rule-logs/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://canglaoshi.blog/","name":"仓老师机场观察","position":1},{"@type":"ListItem","item":"https://canglaoshi.blog/posts/daily-2026-10-15-02-direct-reject-rule-logs/","name":"代理日志显示DIRECT或REJECT？命中规则排查指南","position":2}]}]}</script>
+
+<script>(()=>{let mode='system';try{const saved=localStorage.getItem('reader-theme');if(['system','light','dark'].includes(saved))mode=saved}catch{}const root=document.documentElement;root.dataset.colorMode=mode;root.classList.toggle('dark',mode==='dark'||(mode==='system'&&matchMedia('(prefers-color-scheme: dark)').matches))})();</script>
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/style.css">
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/advertisements.css">
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/search.css"><script defer src="https://canglaoshi.blog/assets/theme/search.js"></script>
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/layouts.css"><link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/effects.css"><link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/skin.css">
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/viewer.css">
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/reader.css">
+<link rel="icon" href="https://canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
+<link rel="stylesheet" href="https://canglaoshi.blog/assets/theme/artalk.css"><script defer src="https://canglaoshi.blog/assets/theme/artalk.js"></script>
+<script defer src="https://canglaoshi.blog/assets/theme/theme.js"></script>
+<script defer src="https://canglaoshi.blog/assets/theme/reader.js"></script>
+<script defer src="https://canglaoshi.blog/assets/theme/viewer.js"></script>
+<script defer src="https://canglaoshi.blog/assets/theme/image-viewer.js"></script>
+
+<script defer src="https://canglaoshi.blog/assets/theme/interactions.js"></script>
+
+<meta name="msvalidate.01" content="3D562902FFD6655EA5B649095B7D8365" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W70209F87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W70209F87D');
+</script>
+
+<script defer src="https://canglaoshi.blog/assets/xblog/google-analytics.js" data-xblog-google-analytics="G-W70209F87D" data-site-hosts="canglaoshi.blog,www.canglaoshi.blog"></script></head>
+
+<body class="reader-page theme-technology article-page">
+<a class="skip" href="#main">跳到正文</a>
+
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" href="https://canglaoshi.blog/"><img src="https://canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png" alt="" width="38" height="38"><span>仓老师机场观察</span></a>
+<nav id="site-navigation" aria-label="站点导航"><a href="https://canglaoshi.blog/">首页</a></nav>
+<a class="search-toggle" href="https://canglaoshi.blog/search/" data-open-dialog="search-dialog" aria-haspopup="dialog" aria-controls="search-dialog" aria-label="搜索" title="搜索"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></a>
+<button id="theme-mode" class="theme-toggle theme-cycle" type="button" aria-label="明暗模式：跟随系统，点击切换为明亮" title="跟随系统 · 点击切换为明亮">
+<svg class="theme-icon-system" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+<svg class="theme-icon-moon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 15.5A8.5 8.5 0 0 1 8.5 3.8 8.5 8.5 0 1 0 20.2 15.5Z"/></svg>
+<svg class="theme-icon-sun" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
+<span id="theme-mode-status" class="visually-hidden" role="status" aria-live="polite"></span>
+<button id="menu-toggle" class="menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="打开菜单" title="打开菜单">
+<svg class="menu-icon-open" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+<svg class="menu-icon-close" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg>
+</button>
+</div>
+</header>
+
+<div class="page-viewport article-viewport"><div class="page-scroll article-scroll">
+<main id="main" tabindex="-1" class="technology-workspace theme-workspace theme-article">
+
+<nav class="breadcrumbs" aria-label="面包屑导航"><ol><li><a href="https://canglaoshi.blog/">仓老师机场观察</a></li><li><span aria-current="page">代理日志显示DIRECT或REJECT？命中规则排查指南</span></li></ol></nav>
+
+
+<div class="tech-reading"><div class="article-rail">
+<aside class="toc"><div>本篇目录</div><nav aria-label="文章目录"><a class="level-2" href="#heading">先把出站名称翻译成人话</a><a class="level-2" href="#heading-1">为什么选了节点，仍显示直连？</a><a class="level-2" href="#heading-2">按这个顺序检查一次</a><a class="level-2" href="#heading-3">哪些情况继续查连接本身？</a><a class="level-2" href="#heading-4">资料来源</a></nav></aside>
+</div><div class="tech-document">
+<article data-pagefind-body>
+<header class="article-header">
+<div class="eyebrow" data-pagefind-ignore>
+思考记录</div>
+<h1 data-pagefind-meta="title">代理日志显示DIRECT或REJECT？命中规则排查指南</h1>
+<div class="metadata" data-pagefind-ignore><span>仓老师机场观察</span><time datetime="2026-10-15T09:19:53&#43;08:00">2026-10-15</time><span><span id="page-views">—</span> 次阅读</span></div>
+<div class="chips" data-pagefind-ignore><a href="https://canglaoshi.blog/categories/network-troubleshooting/">网络排障</a></div>
+</header>
+<div class="prose"><p>代理日志里的DIRECT通常表示这条连接直连，REJECT表示它被本地出站策略拦截。**它们首先描述客户端如何处理请求，不是节点测速成绩。**看到英文就续费，容易把查路标变成给钱包做耐力训练。</p>
+<h2 id="heading">先把出站名称翻译成人话</h2>
+<p>以下以使用Mihomo内核的客户端为例，其他应用的字段与行为可能不同。<a href="https://wiki.metacubex.one/config/proxies/built-in/">官方预置出站文档</a>给出了这些名称的含义。</p>
+<table>
+<thead>
+<tr>
+<th>记录</th>
+<th>通常表示</th>
+<th>先检查什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DIRECT</td>
+<td>直接出站</td>
+<td>是否符合预期分流</td>
+</tr>
+<tr>
+<td>REJECT</td>
+<td>拒绝该请求出站</td>
+<td>命中了哪条拦截规则</td>
+</tr>
+<tr>
+<td>REJECT-DROP</td>
+<td>静默丢弃请求</td>
+<td>是否因此等待至超时</td>
+</tr>
+</tbody>
+</table>
+<p>DIRECT不走这次指定的代理节点，但若设备还运行其他VPN，仍可能受其路由影响；不能只看这一个词，就断言网站看到了家中公网IP。日志出现某个策略组名时，也要查看组内实际选择，名字叫“高速”并不会让它长出翅膀。</p>
+<h2 id="heading-1">为什么选了节点，仍显示直连？</h2>
+<p>规则模式下，选中节点只影响使用该策略组的连接，不会把所有请求自动拉进来。<a href="https://wiki.metacubex.one/config/rules/">官方路由说明</a>指出，规则从上往下匹配，靠前规则优先。</p>
+<p>假设某个域名先匹配到直连规则，后面再放代理规则，通常不能抢回这一条连接。排查要找“实际命中哪条”，而不是只确认自己确实点过节点。还分不清模式时，可先读本站<a href="https://www.canglaoshi.blog/posts/daily-2026-09-30-clash-rule-global-tun/">规则与全局模式说明</a>。</p>
+<h2 id="heading-2">按这个顺序检查一次</h2>
+<ol>
+<li>**先定位请求。**在连接或日志页按目标域名、发生时间筛选，避免把后台广告请求当成主页面故障。</li>
+<li>**记录处理结果。**查看可用的命中规则、策略组、实际出站和错误信息；字段名称随客户端变化。</li>
+<li>**判断是否符合需求。**应直连却走代理，或应代理却直连，都先核对规则；REJECT可能是正常的广告拦截，也可能误伤需要的资源。</li>
+<li>**小范围调整后复测。**先备份配置，只处理已确认的问题规则，重新发起连接并对照记录，不要一次删光拦截项。</li>
+</ol>
+<p>页面常由多个域名加载资源。同一时间既有DIRECT又有REJECT并不稀奇，像一家餐厅同时有堂食和打烊中的档口，需要逐项看，不能一票判定整个客户端损坏。</p>
+<h2 id="heading-3">哪些情况继续查连接本身？</h2>
+<p>若实际出站已经符合预期，仍然超时或加载失败，再检查节点连通性、DNS与目标服务状态，可参考<a href="https://www.canglaoshi.blog/posts/vpn-slow-speed-troubleshooting/">速度与连接排查指南</a>。策略名称不能证明请求已成功送达。</p>
+<p>向客服求助时，提供时间、目标域名和必要的错误片段，并遮住订阅地址、令牌与私人信息。日志是线索，别把整本私人日记一起寄出去。</p>
+<h2 id="heading-4">资料来源</h2>
+<p>资料核对日期：2026年10月15日。</p>
+<ul>
+<li><a href="https://wiki.metacubex.one/config/proxies/built-in/">Mihomo：预置出站</a>：DIRECT、REJECT与REJECT-DROP的官方定义。</li>
+<li><a href="https://wiki.metacubex.one/config/rules/">Mihomo：路由规则与优先级</a>：规则匹配顺序、条件及适用行为。</li>
+</ul>
+</div>
+<div class="article-likes" data-pagefind-ignore>
+<button id="page-like" class="like-button" type="button" aria-pressed="false" aria-describedby="page-like-message" disabled>
+<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+<span id="page-like-label">点赞</span><span id="page-like-count">—</span>
+</button><p id="page-like-message" role="status"></p>
+</div>
+<div class="article-tags" data-pagefind-ignore><a href="https://canglaoshi.blog/tags/vpn/"># VPN</a><a href="https://canglaoshi.blog/tags/proxy-guides/"># 机场指南</a></div>
+<nav class="pagination" aria-label="相邻文章" data-pagefind-ignore><a href="https://canglaoshi.blog/posts/flybit-airport-plans-guide-2026/">← 上一篇</a><a href="https://canglaoshi.blog/posts/daily-2026-10-15-01-static-dedicated-ip/">下一篇 →</a></nav>
+<section class="comments-section" data-pagefind-ignore><h2>评论</h2><div id="comments"></div></section>
+</article>
+</div></div>
+
+</main>
+</div>
+<button id="back-to-top" class="back-to-top" type="button" aria-label="返回顶部" title="返回顶部" hidden>
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M12 20V8m-5 5 5-5 5 5"/></svg>
+</button>
+</div>
+
+<footer class="site-footer">
+<nav class="friend-links" aria-label="友情链接"><span class="friend-links-label">友情链接</span><a href="https://goflybit.com/#/register?code=VDhOlcf4" target="_blank" rel="noopener noreferrer">FlyBit机场</a><a href="https://home.99ba2026.best/#/register?code=lsE7jbti" target="_blank" rel="noopener noreferrer">99吧</a><a href="https://t.me/oldsix985" target="_blank" rel="noopener noreferrer">Telegram联系我</a></nav>
+<span>© 仓老师机场观察</span>
+</footer>
+
+
+
+<dialog id="search-dialog" class="reader-dialog site-search" aria-labelledby="search-title" data-reader-dialog data-pagefind-ignore>
+<header class="reader-dialog-header"><h2 id="search-title">搜索文章</h2><button class="dialog-close" type="button" data-close-dialog aria-label="关闭搜索" title="关闭搜索">×</button></header>
+<div class="reader-dialog-body">
+
+<div id="site-search-ui" data-module="https://canglaoshi.blog/pagefind/pagefind-component-ui.js" data-stylesheet="https://canglaoshi.blog/pagefind/pagefind-component-ui.css" hidden>
+
+<pagefind-config bundle-path="https://canglaoshi.blog/pagefind/" base-url="https://canglaoshi.blog/" lang="zh-cn" no-worker></pagefind-config>
+<pagefind-input placeholder="搜索文章标题或正文"></pagefind-input>
+<pagefind-summary></pagefind-summary>
+<pagefind-results></pagefind-results>
+</div>
+<p id="search-status" class="search-status" role="status">正在加载搜索…</p>
+<button id="search-retry" class="button" type="button" hidden>重新加载</button>
+
+</div>
+</dialog>
+
+<script id="blog-comments-config" type="application/json">{"comments":true,"likes":true,"locale":"zh-CN","pageKey":"/p/7f4b7f0d-2840-43b4-b29b-925bc44d03e6/","pageTitle":"代理日志显示DIRECT或REJECT？命中规则排查指南","server":"https://upfqpobmiewm.sealosgzg.site","site":"xblog-88abb41f-3510-449d-bb67-00edd9a24e07","views":true,"viewsBase":0}</script>
+
+</body>
+</html>

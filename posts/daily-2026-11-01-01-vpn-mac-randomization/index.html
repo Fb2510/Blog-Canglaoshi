@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="technology">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VPN会隐藏MAC地址吗？随机地址与出口IP的区别 · 仓老师机场观察</title>
+<meta name="description" content="VPN会隐藏MAC地址吗？了解Wi-Fi随机MAC地址、固定私有地址与VPN出口IP的区别，按iPhone及安卓官方说明检查设置，并区分本地设备识别和网站账号识别。">
+<meta name="keywords" content="VPN隐藏MAC地址,随机MAC地址,私有无线局域网地址,VPN出口IP">
+<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://www.canglaoshi.blog/posts/daily-2026-11-01-01-vpn-mac-randomization/">
+<meta property="og:title" content="VPN会隐藏MAC地址吗？随机地址与出口IP的区别">
+<meta property="og:description" content="VPN会隐藏MAC地址吗？了解Wi-Fi随机MAC地址、固定私有地址与VPN出口IP的区别，按iPhone及安卓官方说明检查设置，并区分本地设备识别和网站账号识别。">
+<meta property="og:url" content="https://www.canglaoshi.blog/posts/daily-2026-11-01-01-vpn-mac-randomization/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="仓老师机场观察">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png"><meta property="og:image:alt" content="仓老师机场观察">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VPN会隐藏MAC地址吗？随机地址与出口IP的区别">
+<meta name="twitter:description" content="VPN会隐藏MAC地址吗？了解Wi-Fi随机MAC地址、固定私有地址与VPN出口IP的区别，按iPhone及安卓官方说明检查设置，并区分本地设备识别和网站账号识别。">
+<meta name="twitter:image" content="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
+<meta name="author" content="仓老师机场观察"><meta property="article:published_time" content="2026-11-01T09:11:43&#43;08:00"><meta property="article:modified_time" content="2026-11-01T09:26:02&#43;08:00"><meta property="article:tag" content="VPN"><meta property="article:tag" content="网络隐私">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://www.canglaoshi.blog/posts/daily-2026-11-01-01-vpn-mac-randomization/#article","@type":"BlogPosting","author":{"@type":"Person","name":"仓老师机场观察"},"dateModified":"2026-11-01T09:26:02+08:00","datePublished":"2026-11-01T09:11:43+08:00","description":"VPN会隐藏MAC地址吗？了解Wi-Fi随机MAC地址、固定私有地址与VPN出口IP的区别，按iPhone及安卓官方说明检查设置，并区分本地设备识别和网站账号识别。","headline":"VPN会隐藏MAC地址吗？随机地址与出口IP的区别","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://www.canglaoshi.blog/posts/daily-2026-11-01-01-vpn-mac-randomization/","@type":"WebPage"},"url":"https://www.canglaoshi.blog/posts/daily-2026-11-01-01-vpn-mac-randomization/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://www.canglaoshi.blog/","name":"仓老师机场观察","position":1},{"@type":"ListItem","item":"https://www.canglaoshi.blog/posts/daily-2026-11-01-01-vpn-mac-randomization/","name":"VPN会隐藏MAC地址吗？随机地址与出口IP的区别","position":2}]}]}</script>
+
+<script>(()=>{let mode='system';try{const saved=localStorage.getItem('reader-theme');if(['system','light','dark'].includes(saved))mode=saved}catch{}const root=document.documentElement;root.dataset.colorMode=mode;root.classList.toggle('dark',mode==='dark'||(mode==='system'&&matchMedia('(prefers-color-scheme: dark)').matches))})();</script>
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/style.css">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/advertisements.css">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/search.css"><script defer src="https://www.canglaoshi.blog/assets/theme/search.js"></script>
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/layouts.css"><link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/effects.css"><link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/skin.css">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/viewer.css">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/reader.css">
+<link rel="icon" href="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png">
+<link rel="stylesheet" href="https://www.canglaoshi.blog/assets/theme/artalk.css"><script defer src="https://www.canglaoshi.blog/assets/theme/artalk.js"></script>
+<script defer src="https://www.canglaoshi.blog/assets/theme/theme.js"></script>
+<script defer src="https://www.canglaoshi.blog/assets/theme/reader.js"></script>
+<script defer src="https://www.canglaoshi.blog/assets/theme/viewer.js"></script>
+<script defer src="https://www.canglaoshi.blog/assets/theme/image-viewer.js"></script>
+
+<script defer src="https://www.canglaoshi.blog/assets/theme/interactions.js"></script>
+
+<meta name="msvalidate.01" content="3D562902FFD6655EA5B649095B7D8365" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W70209F87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W70209F87D');
+</script>
+
+<script defer src="https://www.canglaoshi.blog/assets/xblog/google-analytics.js" data-xblog-google-analytics="G-W70209F87D" data-site-hosts="www.canglaoshi.blog"></script></head>
+
+<body class="reader-page theme-technology article-page">
+<a class="skip" href="#main">跳到正文</a>
+
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" href="https://www.canglaoshi.blog/"><img src="https://www.canglaoshi.blog/assets/media/6c9ea934-7e78-4495-8697-c3baea0ad083.png" alt="" width="38" height="38"><span>仓老师机场观察</span></a>
+<nav id="site-navigation" aria-label="站点导航"><a href="https://www.canglaoshi.blog/">首页</a></nav>
+<a class="search-toggle" href="https://www.canglaoshi.blog/search/" data-open-dialog="search-dialog" aria-haspopup="dialog" aria-controls="search-dialog" aria-label="搜索" title="搜索"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></a>
+<button id="theme-mode" class="theme-toggle theme-cycle" type="button" aria-label="明暗模式：跟随系统，点击切换为明亮" title="跟随系统 · 点击切换为明亮">
+<svg class="theme-icon-system" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+<svg class="theme-icon-moon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 15.5A8.5 8.5 0 0 1 8.5 3.8 8.5 8.5 0 1 0 20.2 15.5Z"/></svg>
+<svg class="theme-icon-sun" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
+<span id="theme-mode-status" class="visually-hidden" role="status" aria-live="polite"></span>
+<button id="menu-toggle" class="menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="打开菜单" title="打开菜单">
+<svg class="menu-icon-open" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+<svg class="menu-icon-close" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg>
+</button>
+</div>
+</header>
+
+<div class="page-viewport article-viewport"><div class="page-scroll article-scroll">
+<main id="main" tabindex="-1" class="technology-workspace theme-workspace theme-article">
+
+<nav class="breadcrumbs" aria-label="面包屑导航"><ol><li><a href="https://www.canglaoshi.blog/">仓老师机场观察</a></li><li><span aria-current="page">VPN会隐藏MAC地址吗？随机地址与出口IP的区别</span></li></ol></nav>
+
+
+<div class="tech-reading"><div class="article-rail">
+<aside class="toc"><div>本篇目录</div><nav aria-label="文章目录"><a class="level-2" href="#macip">MAC地址和出口IP，差在哪里？</a><a class="level-2" href="#heading">私有地址，是每次刷新网页都变吗？</a><a class="level-2" href="#heading-1">怎样检查，才不会看错地址？</a><a class="level-2" href="#heading-2">资料来源</a></nav></aside>
+</div><div class="tech-document">
+<article data-pagefind-body>
+<header class="article-header">
+<div class="eyebrow" data-pagefind-ignore>
+思考记录</div>
+<h1 data-pagefind-meta="title">VPN会隐藏MAC地址吗？随机地址与出口IP的区别</h1>
+<div class="metadata" data-pagefind-ignore><span>仓老师机场观察</span><time datetime="2026-11-01T09:11:43&#43;08:00">2026-11-01</time><span><span id="page-views">—</span> 次阅读</span></div>
+<div class="chips" data-pagefind-ignore><a href="https://www.canglaoshi.blog/categories/vpn-basics/">VPN入门</a></div>
+</header>
+<div class="prose"><p>日常上网用的VPN或机场代理，通常不会替Wi-Fi网卡更换MAC地址。VPN主要改变被接管流量的出口；随机MAC地址则减少设备在无线接入环节被同一个地址识别。两者可以一起使用，解决的是不同位置的问题。</p>
+<h2 id="macip">MAC地址和出口IP，差在哪里？</h2>
+<p>MAC地址用于本地链路通信，路由器或接入点需要识别当前连接的设备。<a href="https://www.cloudflare.com/learning/network-layer/what-is-a-network-switch/">Cloudflare的技术说明</a>指出，MAC地址不属于IP包头；普通跨互联网通信不会把你网卡的MAC地址一路带给远方的网站。</p>
+<p>可以把它想成小区门禁牌和快递转寄地址：换了收件地址，门口的门禁牌并不会跟着换。VPN连接成功后，接入点仍然需要与你的无线网卡通信。<a href="https://protonvpn.com/blog/what-is-mac-address">Proton的说明</a>也明确区分了隐藏公网IP与隐藏MAC地址。</p>
+<table>
+<thead>
+<tr>
+<th>观察位置</th>
+<th>重点看什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>当前Wi-Fi的路由器或接入点</td>
+<td>这次连接使用的MAC地址</td>
+</tr>
+<tr>
+<td>通过VPN访问的目标网站</td>
+<td>对应连接的出口IP</td>
+</tr>
+<tr>
+<td>已登录的网站账号</td>
+<td>账号及主动提交的信息</td>
+</tr>
+</tbody>
+</table>
+<p>机场客户端还受分流规则影响，不能凭一个图标判断全部应用的出口，详见<a href="https://www.canglaoshi.blog/posts/daily-2026-10-06-01-browser-extension-vpn-scope/">扩展与客户端覆盖范围指南</a>。</p>
+<h2 id="heading">私有地址，是每次刷新网页都变吗？</h2>
+<p>不是。<a href="https://support.apple.com/zh-cn/102509">Apple官方文档</a>说明，私有无线局域网地址按不同Wi-Fi分别使用。支持相应选项的系统提供“固定”和“轮替”：固定仍是私有地址，只是不自动轮替；轮替也不等于每次点开网页就换号。</p>
+<p>在iOS 18及更高版本，可进入“设置→无线局域网→当前连接旁的更多信息”，查看私有地址设置。较早版本的界面不同，以设备实际显示为准。</p>
+<p>安卓也有类似机制。<a href="https://source.android.com/docs/core/connect/wifi-mac-randomization?hl=zh-cn">Android官方文档</a>说明，Android 10起默认启用连接时的MAC随机化，并提供按Wi-Fi设置的选项；具体名称和支持情况要看手机实现。</p>
+<h2 id="heading-1">怎样检查，才不会看错地址？</h2>
+<ol>
+<li>在当前Wi-Fi的详情中查看本次连接使用的地址，别只看“关于本机”里的硬件地址。</li>
+<li>保持同一个Wi-Fi，连接VPN前后分别核对本地地址与网页显示的公网IP，两项分开记录。</li>
+<li>若自己管理路由器，可对照已连接设备列表；只检查自己的设备，不必把整张列表发到公开群里。</li>
+</ol>
+<p>如果公司接入规则登记了设备地址，变更后可能需要管理员更新登记。遇到连接异常，先按系统官方说明更新软件、确认该Wi-Fi的设置，再决定是否调整私有地址，别为了排障把所有地点的开关一起关掉。</p>
+<p>随机MAC地址不会清空登录状态，换出口也不会注销账号。网站仍认识你时，继续看<a href="https://www.canglaoshi.blog/posts/daily-2026-10-04-05-vpn-incognito-privacy/">VPN与无痕模式的区别</a>，别让门禁牌背上会员卡的锅。</p>
+<p>作者：仓老师机场观察</p>
+<h2 id="heading-2">资料来源</h2>
+<p>资料核对日期：2026年11月1日。本文依据官方技术资料整理，未进行设备实测；Proton旧文仅用于VPN与MAC地址的概念区分，系统设置以当前平台文档为准。</p>
+<ul>
+<li><a href="https://www.cloudflare.com/learning/network-layer/what-is-a-network-switch/">Cloudflare：交换机、MAC地址与IP地址的区别</a></li>
+<li><a href="https://protonvpn.com/blog/what-is-mac-address">Proton：MAC地址与VPN的作用边界，发表于2023年8月17日</a></li>
+<li><a href="https://support.apple.com/zh-cn/102509">Apple：在设备上使用私有无线局域网地址</a></li>
+<li><a href="https://source.android.com/docs/core/connect/wifi-mac-randomization?hl=zh-cn">Android：实现随机分配MAC地址</a></li>
+</ul>
+</div>
+<div class="article-likes" data-pagefind-ignore>
+<button id="page-like" class="like-button" type="button" aria-pressed="false" aria-describedby="page-like-message" disabled>
+<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+<span id="page-like-label">点赞</span><span id="page-like-count">—</span>
+</button><p id="page-like-message" role="status"></p>
+</div>
+<div class="article-tags" data-pagefind-ignore><a href="https://www.canglaoshi.blog/tags/vpn/"># VPN</a><a href="https://www.canglaoshi.blog/tags/online-privacy/"># 网络隐私</a></div>
+<nav class="pagination" aria-label="相邻文章" data-pagefind-ignore><a href="https://www.canglaoshi.blog/posts/flybit-airport-plans-guide-2026/">← 上一篇</a><a href="https://www.canglaoshi.blog/posts/daily-2026-10-30-01-proxy-load-balance-speed/">下一篇 →</a></nav>
+<section class="comments-section" data-pagefind-ignore><h2>评论</h2><div id="comments"></div></section>
+</article>
+</div></div>
+
+</main>
+</div>
+<button id="back-to-top" class="back-to-top" type="button" aria-label="返回顶部" title="返回顶部" hidden>
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M12 20V8m-5 5 5-5 5 5"/></svg>
+</button>
+</div>
+
+<footer class="site-footer">
+<nav class="friend-links" aria-label="友情链接"><span class="friend-links-label">友情链接</span><a href="https://goflybit.com/#/register?code=VDhOlcf4" target="_blank" rel="noopener noreferrer">FlyBit机场</a><a href="https://home.99ba2026.best/#/register?code=lsE7jbti" target="_blank" rel="noopener noreferrer">99吧</a><a href="https://t.me/oldsix985" target="_blank" rel="noopener noreferrer">Telegram联系我</a></nav>
+<span>© 仓老师机场观察</span>
+</footer>
+
+
+
+<dialog id="search-dialog" class="reader-dialog site-search" aria-labelledby="search-title" data-reader-dialog data-pagefind-ignore>
+<header class="reader-dialog-header"><h2 id="search-title">搜索文章</h2><button class="dialog-close" type="button" data-close-dialog aria-label="关闭搜索" title="关闭搜索">×</button></header>
+<div class="reader-dialog-body">
+
+<div id="site-search-ui" data-module="https://www.canglaoshi.blog/pagefind/pagefind-component-ui.js" data-stylesheet="https://www.canglaoshi.blog/pagefind/pagefind-component-ui.css" hidden>
+
+<pagefind-config bundle-path="https://www.canglaoshi.blog/pagefind/" base-url="https://www.canglaoshi.blog/" lang="zh-cn" no-worker></pagefind-config>
+<pagefind-input placeholder="搜索文章标题或正文"></pagefind-input>
+<pagefind-summary></pagefind-summary>
+<pagefind-results></pagefind-results>
+</div>
+<p id="search-status" class="search-status" role="status">正在加载搜索…</p>
+<button id="search-retry" class="button" type="button" hidden>重新加载</button>
+
+</div>
+</dialog>
+
+<script id="blog-comments-config" type="application/json">{"comments":true,"likes":true,"locale":"zh-CN","pageKey":"/p/7e7d273e-ddd8-4563-9cc0-cc81c379dc95/","pageTitle":"VPN会隐藏MAC地址吗？随机地址与出口IP的区别","server":"https://upfqpobmiewm.sealosgzg.site","site":"xblog-88abb41f-3510-449d-bb67-00edd9a24e07","views":true,"viewsBase":0}</script>
+
+</body>
+</html>
